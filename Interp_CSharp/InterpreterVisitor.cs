@@ -23,11 +23,13 @@ public class InterpreterVisitor : Visitor {
   Hashtable mVariableMap;
   Stack<MatrixElement> mStack;
   Dictionary<String, Element> mDict;
+  Queue<int> mQueue;
 
   public InterpreterVisitor(){
     mVariableMap = new Hashtable();
     mStack = new Stack<MatrixElement>();
     mDict = new Dictionary<string, Element>();
+    mQueue = new Queue<int>();
   }
 
   public override void VisitVariableElement(VariableElement element){
@@ -42,7 +44,7 @@ public class InterpreterVisitor : Visitor {
   }
   public override void VisitIntegerElement(IntegerElement element){
     int element_value = int.Parse(element.getText());
-    //mStack.Push(element_value);
+    mQueue.Enqueue(element_value);
   }
   public override void VisitAssignmentOperationElement(AssignmentOperationElement element){
     String variable_name = element.getLhs().getText();
@@ -57,7 +59,8 @@ public class InterpreterVisitor : Visitor {
     VisitElement(element.getRhs());
     MatrixElement rhs = mStack.Pop();
     MatrixElement lhs = mStack.Pop();
-    MatrixElement result = lhs.Addition(rhs);
+    MatrixElement result = new MatrixElement();
+    bool ret = lhs.Addition(lhs, rhs, ref result);
     mStack.Push(result);    
   }
   public override void VisitPrintOperationElement(PrintOperationElement element){
@@ -69,12 +72,18 @@ public class InterpreterVisitor : Visitor {
   public override void VisitRowElement(RowElement element)
   {
       Console.WriteLine("VisitRowElement");
-
+      List<int> row = element.getRow();
+      for (int i = 0; i < element.Count(); ++i)
+      {
+          Console.Write(row[i] + " ");
+      }
+      Console.WriteLine();
   }
 
   public override void VisitMatrixElement(MatrixElement element)
   {
       Console.WriteLine("VisitMatrixElement");
-
+      //MatrixElement element_value = int.Parse(element.getText());
+      mStack.Push(element);
   }
 }

@@ -35,4 +35,6 @@ public class RowElement : Element
     public void setRow(List<int> value) { rowElements = value; }
     public int Count() { return rowElements.Count; }
     public void addElement(IntegerElement item) { rowElements.Add(Int32.Parse(item.getText())); }
+    public void addElement(int item) { rowElements.Add(item); }
+    public int getElement(int index) { return rowElements[index]; }
 }

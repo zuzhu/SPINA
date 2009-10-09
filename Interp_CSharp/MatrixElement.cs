@@ -1,6 +1,11 @@
 ﻿////////////////////////////////////////////////////////////////////////
 // IntegerElement.cs: holds the data needed to represent an Integer.
 // 
+// version: 1.2
+// description: Matrix Addition added
+// author: Zutao Zhu (zuzhu@syr.edu)
+// language: C# .Net 3.5
+// 
 // version: 1.1
 // description: part of the interpreter example for the visitor design
 //  pattern.
@@ -30,7 +35,13 @@ public class MatrixElement : Element
 
     public MatrixElement()
     {
+        numOfRows = 0;
         rows = new List<RowElement>();
+    }
+
+    public int GetNumOfRows()
+    {
+        return numOfRows;
     }
 
     public List<RowElement> getRows() { return rows; }
@@ -72,9 +83,34 @@ public class MatrixElement : Element
         return s.ToString();
     }
 
-    public MatrixElement Addition(MatrixElement b)
+    public bool Addition(MatrixElement a, MatrixElement b, ref MatrixElement result)
     {
         Console.WriteLine("matrix addition");
-        return this;
+        List<RowElement> aRows = a.getRows();
+        List<RowElement> bRows = b.getRows();
+
+        if (aRows.Count != bRows.Count)
+            return false;
+
+        List<RowElement> resRow = new List<RowElement>();
+
+        for (int i = 0; i < aRows.Count; ++i)
+        {
+            RowElement r = new RowElement();
+            for (int j = 0; j < aRows[i].Count(); ++j)
+            {
+                r.addElement(aRows[i].getElement(j) + bRows[i].getElement(j));
+            }
+            result.addRows(r);
+        }
+
+        return true;
+    }
+
+    public bool Multiplication(MatrixElement a, MatrixElement b, ref MatrixElement result)
+    {
+        Console.WriteLine("matrix multiplication");
+        
+        return true;
     }
 }
