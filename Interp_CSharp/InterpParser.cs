@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-09-26 11:58:21
+// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-09 21:14:49
 
 
 using System.Collections.Generic;
@@ -299,7 +299,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "assignment"
-    // Interp.g:39:1: assignment returns [AssignmentOperationElement ret] : variable ASSIGNMENT ( var_or_int_literal | matrix | addition ) SEMI ;
+    // Interp.g:39:1: assignment returns [AssignmentOperationElement ret] : variable ASSIGNMENT ( var_or_int_literal | matrix | addition | multiplication ) SEMI ;
     public InterpParser.assignment_return assignment() // throws RecognitionException [1]
     {   
         InterpParser.assignment_return retval = new InterpParser.assignment_return();
@@ -308,7 +308,7 @@ public class InterpParser : Parser
         object root_0 = null;
 
         IToken ASSIGNMENT5 = null;
-        IToken SEMI9 = null;
+        IToken SEMI10 = null;
         InterpParser.variable_return variable4 = null;
 
         InterpParser.var_or_int_literal_return var_or_int_literal6 = null;
@@ -317,17 +317,19 @@ public class InterpParser : Parser
 
         InterpParser.addition_return addition8 = null;
 
+        InterpParser.multiplication_return multiplication9 = null;
+
 
         object ASSIGNMENT5_tree=null;
-        object SEMI9_tree=null;
+        object SEMI10_tree=null;
 
 
           retval.ret = new AssignmentOperationElement();
 
         try 
     	{
-            // Interp.g:43:3: ( variable ASSIGNMENT ( var_or_int_literal | matrix | addition ) SEMI )
-            // Interp.g:43:5: variable ASSIGNMENT ( var_or_int_literal | matrix | addition ) SEMI
+            // Interp.g:43:3: ( variable ASSIGNMENT ( var_or_int_literal | matrix | addition | multiplication ) SEMI )
+            // Interp.g:43:5: variable ASSIGNMENT ( var_or_int_literal | matrix | addition | multiplication ) SEMI
             {
             	root_0 = (object)adaptor.GetNilNode();
 
@@ -341,50 +343,64 @@ public class InterpParser : Parser
             		ASSIGNMENT5_tree = (object)adaptor.Create(ASSIGNMENT5);
             		adaptor.AddChild(root_0, ASSIGNMENT5_tree);
 
-            	// Interp.g:45:5: ( var_or_int_literal | matrix | addition )
-            	int alt3 = 3;
+            	// Interp.g:45:5: ( var_or_int_literal | matrix | addition | multiplication )
+            	int alt3 = 4;
             	switch ( input.LA(1) ) 
             	{
             	case VARIABLE:
             		{
-            	    int LA3_1 = input.LA(2);
-
-            	    if ( (LA3_1 == PLUS) )
+            	    switch ( input.LA(2) ) 
             	    {
+            	    case MUL:
+            	    	{
+            	        alt3 = 4;
+            	        }
+            	        break;
+            	    case PLUS:
+            	    	{
             	        alt3 = 3;
-            	    }
-            	    else if ( (LA3_1 == SEMI) )
-            	    {
+            	        }
+            	        break;
+            	    case SEMI:
+            	    	{
             	        alt3 = 1;
-            	    }
-            	    else 
-            	    {
-            	        NoViableAltException nvae_d3s1 =
-            	            new NoViableAltException("", 3, 1, input);
+            	        }
+            	        break;
+            	    	default:
+            	    	    NoViableAltException nvae_d3s1 =
+            	    	        new NoViableAltException("", 3, 1, input);
 
-            	        throw nvae_d3s1;
+            	    	    throw nvae_d3s1;
             	    }
+
             	    }
             	    break;
             	case INT_LITERAL:
             		{
-            	    int LA3_2 = input.LA(2);
-
-            	    if ( (LA3_2 == PLUS) )
+            	    switch ( input.LA(2) ) 
             	    {
+            	    case MUL:
+            	    	{
+            	        alt3 = 4;
+            	        }
+            	        break;
+            	    case PLUS:
+            	    	{
             	        alt3 = 3;
-            	    }
-            	    else if ( (LA3_2 == SEMI) )
-            	    {
+            	        }
+            	        break;
+            	    case SEMI:
+            	    	{
             	        alt3 = 1;
-            	    }
-            	    else 
-            	    {
-            	        NoViableAltException nvae_d3s2 =
-            	            new NoViableAltException("", 3, 2, input);
+            	        }
+            	        break;
+            	    	default:
+            	    	    NoViableAltException nvae_d3s2 =
+            	    	        new NoViableAltException("", 3, 2, input);
 
-            	        throw nvae_d3s2;
+            	    	    throw nvae_d3s2;
             	    }
+
             	    }
             	    break;
             	case LBRACK:
@@ -437,12 +453,24 @@ public class InterpParser : Parser
 
             	        }
             	        break;
+            	    case 4 :
+            	        // Interp.g:48:7: multiplication
+            	        {
+            	        	PushFollow(FOLLOW_multiplication_in_assignment169);
+            	        	multiplication9 = multiplication();
+            	        	state.followingStackPointer--;
+
+            	        	adaptor.AddChild(root_0, multiplication9.Tree);
+            	        	 retval.ret.setRhs(((multiplication9 != null) ? multiplication9.ret : null)); 
+
+            	        }
+            	        break;
 
             	}
 
-            	SEMI9=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_assignment169); 
-            		SEMI9_tree = (object)adaptor.Create(SEMI9);
-            		adaptor.AddChild(root_0, SEMI9_tree);
+            	SEMI10=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_assignment179); 
+            		SEMI10_tree = (object)adaptor.Create(SEMI10);
+            		adaptor.AddChild(root_0, SEMI10_tree);
 
 
             }
@@ -479,7 +507,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "var_or_int_literal"
-    // Interp.g:50:1: var_or_int_literal returns [Element ret] : ( variable | int_literal ) ;
+    // Interp.g:51:1: var_or_int_literal returns [Element ret] : ( variable | int_literal ) ;
     public InterpParser.var_or_int_literal_return var_or_int_literal() // throws RecognitionException [1]
     {   
         InterpParser.var_or_int_literal_return retval = new InterpParser.var_or_int_literal_return();
@@ -487,20 +515,20 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        InterpParser.variable_return variable10 = null;
+        InterpParser.variable_return variable11 = null;
 
-        InterpParser.int_literal_return int_literal11 = null;
+        InterpParser.int_literal_return int_literal12 = null;
 
 
 
         try 
     	{
-            // Interp.g:51:3: ( ( variable | int_literal ) )
-            // Interp.g:51:6: ( variable | int_literal )
+            // Interp.g:52:3: ( ( variable | int_literal ) )
+            // Interp.g:52:6: ( variable | int_literal )
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	// Interp.g:51:6: ( variable | int_literal )
+            	// Interp.g:52:6: ( variable | int_literal )
             	int alt4 = 2;
             	int LA4_0 = input.LA(1);
 
@@ -522,26 +550,26 @@ public class InterpParser : Parser
             	switch (alt4) 
             	{
             	    case 1 :
-            	        // Interp.g:51:7: variable
+            	        // Interp.g:52:7: variable
             	        {
-            	        	PushFollow(FOLLOW_variable_in_var_or_int_literal185);
-            	        	variable10 = variable();
+            	        	PushFollow(FOLLOW_variable_in_var_or_int_literal195);
+            	        	variable11 = variable();
             	        	state.followingStackPointer--;
 
-            	        	adaptor.AddChild(root_0, variable10.Tree);
-            	        	 retval.ret = ((variable10 != null) ? variable10.ret : null); 
+            	        	adaptor.AddChild(root_0, variable11.Tree);
+            	        	 retval.ret = ((variable11 != null) ? variable11.ret : null); 
 
             	        }
             	        break;
             	    case 2 :
-            	        // Interp.g:52:7: int_literal
+            	        // Interp.g:53:7: int_literal
             	        {
-            	        	PushFollow(FOLLOW_int_literal_in_var_or_int_literal196);
-            	        	int_literal11 = int_literal();
+            	        	PushFollow(FOLLOW_int_literal_in_var_or_int_literal206);
+            	        	int_literal12 = int_literal();
             	        	state.followingStackPointer--;
 
-            	        	adaptor.AddChild(root_0, int_literal11.Tree);
-            	        	retval.ret = ((int_literal11 != null) ? int_literal11.ret : null); 
+            	        	adaptor.AddChild(root_0, int_literal12.Tree);
+            	        	retval.ret = ((int_literal12 != null) ? int_literal12.ret : null); 
 
             	        }
             	        break;
@@ -583,7 +611,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "matrix"
-    // Interp.g:54:1: matrix returns [MatrixElement ret] : '[' e1= row ( ';' e2= row )* ']' ;
+    // Interp.g:55:1: matrix returns [MatrixElement ret] : '[' e1= row ( ';' e2= row )* ']' ;
     public InterpParser.matrix_return matrix() // throws RecognitionException [1]
     {   
         InterpParser.matrix_return retval = new InterpParser.matrix_return();
@@ -591,39 +619,39 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken char_literal12 = null;
         IToken char_literal13 = null;
         IToken char_literal14 = null;
+        IToken char_literal15 = null;
         InterpParser.row_return e1 = null;
 
         InterpParser.row_return e2 = null;
 
 
-        object char_literal12_tree=null;
         object char_literal13_tree=null;
         object char_literal14_tree=null;
+        object char_literal15_tree=null;
 
 
           retval.ret = new MatrixElement();
 
         try 
     	{
-            // Interp.g:58:3: ( '[' e1= row ( ';' e2= row )* ']' )
-            // Interp.g:58:5: '[' e1= row ( ';' e2= row )* ']'
+            // Interp.g:59:3: ( '[' e1= row ( ';' e2= row )* ']' )
+            // Interp.g:59:5: '[' e1= row ( ';' e2= row )* ']'
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	char_literal12=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_matrix221); 
-            		char_literal12_tree = (object)adaptor.Create(char_literal12);
-            		adaptor.AddChild(root_0, char_literal12_tree);
+            	char_literal13=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_matrix231); 
+            		char_literal13_tree = (object)adaptor.Create(char_literal13);
+            		adaptor.AddChild(root_0, char_literal13_tree);
 
-            	PushFollow(FOLLOW_row_in_matrix225);
+            	PushFollow(FOLLOW_row_in_matrix235);
             	e1 = row();
             	state.followingStackPointer--;
 
             	adaptor.AddChild(root_0, e1.Tree);
             	 retval.ret.addRows(((e1 != null) ? e1.ret : null)); 
-            	// Interp.g:59:5: ( ';' e2= row )*
+            	// Interp.g:60:5: ( ';' e2= row )*
             	do 
             	{
             	    int alt5 = 2;
@@ -638,13 +666,13 @@ public class InterpParser : Parser
             	    switch (alt5) 
             		{
             			case 1 :
-            			    // Interp.g:59:6: ';' e2= row
+            			    // Interp.g:60:6: ';' e2= row
             			    {
-            			    	char_literal13=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_matrix234); 
-            			    		char_literal13_tree = (object)adaptor.Create(char_literal13);
-            			    		adaptor.AddChild(root_0, char_literal13_tree);
+            			    	char_literal14=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_matrix244); 
+            			    		char_literal14_tree = (object)adaptor.Create(char_literal14);
+            			    		adaptor.AddChild(root_0, char_literal14_tree);
 
-            			    	PushFollow(FOLLOW_row_in_matrix238);
+            			    	PushFollow(FOLLOW_row_in_matrix248);
             			    	e2 = row();
             			    	state.followingStackPointer--;
 
@@ -662,9 +690,9 @@ public class InterpParser : Parser
             	loop5:
             		;	// Stops C# compiler whining that label 'loop5' has no statements
 
-            	char_literal14=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_matrix248); 
-            		char_literal14_tree = (object)adaptor.Create(char_literal14);
-            		adaptor.AddChild(root_0, char_literal14_tree);
+            	char_literal15=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_matrix258); 
+            		char_literal15_tree = (object)adaptor.Create(char_literal15);
+            		adaptor.AddChild(root_0, char_literal15_tree);
 
 
             }
@@ -701,7 +729,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "row"
-    // Interp.g:63:1: row returns [RowElement ret] : s= int_literal ( ',' t= int_literal )* ;
+    // Interp.g:64:1: row returns [RowElement ret] : s= int_literal ( ',' t= int_literal )* ;
     public InterpParser.row_return row() // throws RecognitionException [1]
     {   
         InterpParser.row_return retval = new InterpParser.row_return();
@@ -709,31 +737,31 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken char_literal15 = null;
+        IToken char_literal16 = null;
         InterpParser.int_literal_return s = null;
 
         InterpParser.int_literal_return t = null;
 
 
-        object char_literal15_tree=null;
+        object char_literal16_tree=null;
 
 
           retval.ret = new RowElement();
 
         try 
     	{
-            // Interp.g:67:3: (s= int_literal ( ',' t= int_literal )* )
-            // Interp.g:67:5: s= int_literal ( ',' t= int_literal )*
+            // Interp.g:68:3: (s= int_literal ( ',' t= int_literal )* )
+            // Interp.g:68:5: s= int_literal ( ',' t= int_literal )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_int_literal_in_row275);
+            	PushFollow(FOLLOW_int_literal_in_row285);
             	s = int_literal();
             	state.followingStackPointer--;
 
             	adaptor.AddChild(root_0, s.Tree);
             	 retval.ret.addElement(((s != null) ? s.ret : null)); 
-            	// Interp.g:68:5: ( ',' t= int_literal )*
+            	// Interp.g:69:5: ( ',' t= int_literal )*
             	do 
             	{
             	    int alt6 = 2;
@@ -748,13 +776,13 @@ public class InterpParser : Parser
             	    switch (alt6) 
             		{
             			case 1 :
-            			    // Interp.g:68:7: ',' t= int_literal
+            			    // Interp.g:69:7: ',' t= int_literal
             			    {
-            			    	char_literal15=(IToken)Match(input,COMMA,FOLLOW_COMMA_in_row285); 
-            			    		char_literal15_tree = (object)adaptor.Create(char_literal15);
-            			    		adaptor.AddChild(root_0, char_literal15_tree);
+            			    	char_literal16=(IToken)Match(input,COMMA,FOLLOW_COMMA_in_row295); 
+            			    		char_literal16_tree = (object)adaptor.Create(char_literal16);
+            			    		adaptor.AddChild(root_0, char_literal16_tree);
 
-            			    	PushFollow(FOLLOW_int_literal_in_row289);
+            			    	PushFollow(FOLLOW_int_literal_in_row299);
             			    	t = int_literal();
             			    	state.followingStackPointer--;
 
@@ -807,7 +835,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "variable"
-    // Interp.g:71:1: variable returns [VariableElement ret] : VARIABLE ;
+    // Interp.g:72:1: variable returns [VariableElement ret] : VARIABLE ;
     public InterpParser.variable_return variable() // throws RecognitionException [1]
     {   
         InterpParser.variable_return retval = new InterpParser.variable_return();
@@ -815,25 +843,25 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken VARIABLE16 = null;
+        IToken VARIABLE17 = null;
 
-        object VARIABLE16_tree=null;
+        object VARIABLE17_tree=null;
 
 
           retval.ret = new VariableElement();
 
         try 
     	{
-            // Interp.g:75:3: ( VARIABLE )
-            // Interp.g:75:5: VARIABLE
+            // Interp.g:76:3: ( VARIABLE )
+            // Interp.g:76:5: VARIABLE
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	VARIABLE16=(IToken)Match(input,VARIABLE,FOLLOW_VARIABLE_in_variable318); 
-            		VARIABLE16_tree = (object)adaptor.Create(VARIABLE16);
-            		adaptor.AddChild(root_0, VARIABLE16_tree);
+            	VARIABLE17=(IToken)Match(input,VARIABLE,FOLLOW_VARIABLE_in_variable328); 
+            		VARIABLE17_tree = (object)adaptor.Create(VARIABLE17);
+            		adaptor.AddChild(root_0, VARIABLE17_tree);
 
-            	 retval.ret.setText(((VARIABLE16 != null) ? VARIABLE16.Text : null)); 
+            	 retval.ret.setText(((VARIABLE17 != null) ? VARIABLE17.Text : null)); 
 
             }
 
@@ -869,7 +897,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "int_literal"
-    // Interp.g:77:1: int_literal returns [IntegerElement ret] : INT_LITERAL ;
+    // Interp.g:78:1: int_literal returns [IntegerElement ret] : INT_LITERAL ;
     public InterpParser.int_literal_return int_literal() // throws RecognitionException [1]
     {   
         InterpParser.int_literal_return retval = new InterpParser.int_literal_return();
@@ -877,25 +905,25 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken INT_LITERAL17 = null;
+        IToken INT_LITERAL18 = null;
 
-        object INT_LITERAL17_tree=null;
+        object INT_LITERAL18_tree=null;
 
 
           retval.ret = new IntegerElement();
 
         try 
     	{
-            // Interp.g:81:3: ( INT_LITERAL )
-            // Interp.g:81:5: INT_LITERAL
+            // Interp.g:82:3: ( INT_LITERAL )
+            // Interp.g:82:5: INT_LITERAL
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	INT_LITERAL17=(IToken)Match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_int_literal339); 
-            		INT_LITERAL17_tree = (object)adaptor.Create(INT_LITERAL17);
-            		adaptor.AddChild(root_0, INT_LITERAL17_tree);
+            	INT_LITERAL18=(IToken)Match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_int_literal349); 
+            		INT_LITERAL18_tree = (object)adaptor.Create(INT_LITERAL18);
+            		adaptor.AddChild(root_0, INT_LITERAL18_tree);
 
-            	 retval.ret.setText(((INT_LITERAL17 != null) ? INT_LITERAL17.Text : null)); 
+            	 retval.ret.setText(((INT_LITERAL18 != null) ? INT_LITERAL18.Text : null)); 
 
             }
 
@@ -931,7 +959,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "addition"
-    // Interp.g:83:1: addition returns [AdditionOperationElement ret] : el1= var_or_int_literal '+' el2= var_or_int_literal ;
+    // Interp.g:84:1: addition returns [AdditionOperationElement ret] : el1= var_or_int_literal '+' el2= var_or_int_literal ;
     public InterpParser.addition_return addition() // throws RecognitionException [1]
     {   
         InterpParser.addition_return retval = new InterpParser.addition_return();
@@ -939,35 +967,35 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken char_literal18 = null;
+        IToken char_literal19 = null;
         InterpParser.var_or_int_literal_return el1 = null;
 
         InterpParser.var_or_int_literal_return el2 = null;
 
 
-        object char_literal18_tree=null;
+        object char_literal19_tree=null;
 
 
           retval.ret = new AdditionOperationElement();
 
         try 
     	{
-            // Interp.g:87:3: (el1= var_or_int_literal '+' el2= var_or_int_literal )
-            // Interp.g:87:5: el1= var_or_int_literal '+' el2= var_or_int_literal
+            // Interp.g:88:3: (el1= var_or_int_literal '+' el2= var_or_int_literal )
+            // Interp.g:88:5: el1= var_or_int_literal '+' el2= var_or_int_literal
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_var_or_int_literal_in_addition362);
+            	PushFollow(FOLLOW_var_or_int_literal_in_addition372);
             	el1 = var_or_int_literal();
             	state.followingStackPointer--;
 
             	adaptor.AddChild(root_0, el1.Tree);
             	 retval.ret.setLhs(((el1 != null) ? el1.ret : null)); 
-            	char_literal18=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_addition371); 
-            		char_literal18_tree = (object)adaptor.Create(char_literal18);
-            		adaptor.AddChild(root_0, char_literal18_tree);
+            	char_literal19=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_addition381); 
+            		char_literal19_tree = (object)adaptor.Create(char_literal19);
+            		adaptor.AddChild(root_0, char_literal19_tree);
 
-            	PushFollow(FOLLOW_var_or_int_literal_in_addition380);
+            	PushFollow(FOLLOW_var_or_int_literal_in_addition390);
             	el2 = var_or_int_literal();
             	state.followingStackPointer--;
 
@@ -996,6 +1024,83 @@ public class InterpParser : Parser
     }
     // $ANTLR end "addition"
 
+    public class multiplication_return : ParserRuleReturnScope
+    {
+        public MultiplicationOperationElement ret;
+        private object tree;
+        override public object Tree
+        {
+        	get { return tree; }
+        	set { tree = (object) value; }
+        }
+    };
+
+    // $ANTLR start "multiplication"
+    // Interp.g:92:1: multiplication returns [MultiplicationOperationElement ret] : el1= var_or_int_literal '*' el2= var_or_int_literal ;
+    public InterpParser.multiplication_return multiplication() // throws RecognitionException [1]
+    {   
+        InterpParser.multiplication_return retval = new InterpParser.multiplication_return();
+        retval.Start = input.LT(1);
+
+        object root_0 = null;
+
+        IToken char_literal20 = null;
+        InterpParser.var_or_int_literal_return el1 = null;
+
+        InterpParser.var_or_int_literal_return el2 = null;
+
+
+        object char_literal20_tree=null;
+
+
+          retval.ret = new MultiplicationOperationElement();
+
+        try 
+    	{
+            // Interp.g:96:3: (el1= var_or_int_literal '*' el2= var_or_int_literal )
+            // Interp.g:96:5: el1= var_or_int_literal '*' el2= var_or_int_literal
+            {
+            	root_0 = (object)adaptor.GetNilNode();
+
+            	PushFollow(FOLLOW_var_or_int_literal_in_multiplication417);
+            	el1 = var_or_int_literal();
+            	state.followingStackPointer--;
+
+            	adaptor.AddChild(root_0, el1.Tree);
+            	 retval.ret.setLhs(((el1 != null) ? el1.ret : null)); 
+            	char_literal20=(IToken)Match(input,MUL,FOLLOW_MUL_in_multiplication426); 
+            		char_literal20_tree = (object)adaptor.Create(char_literal20);
+            		adaptor.AddChild(root_0, char_literal20_tree);
+
+            	PushFollow(FOLLOW_var_or_int_literal_in_multiplication435);
+            	el2 = var_or_int_literal();
+            	state.followingStackPointer--;
+
+            	adaptor.AddChild(root_0, el2.Tree);
+            	 retval.ret.setRhs(((el2 != null) ? el2.ret : null)); 
+
+            }
+
+            retval.Stop = input.LT(-1);
+
+            	retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+            	adaptor.SetTokenBoundaries(retval.Tree, (IToken) retval.Start, (IToken) retval.Stop);
+        }
+        catch (RecognitionException re) 
+    	{
+            ReportError(re);
+            Recover(input,re);
+    	// Conversion of the second argument necessary, but harmless
+    	retval.Tree = (object)adaptor.ErrorNode(input, (IToken) retval.Start, input.LT(-1), re);
+
+        }
+        finally 
+    	{
+        }
+        return retval;
+    }
+    // $ANTLR end "multiplication"
+
     public class print_return : ParserRuleReturnScope
     {
         public PrintOperationElement ret;
@@ -1008,7 +1113,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "print"
-    // Interp.g:91:1: print returns [PrintOperationElement ret] : 'print' var_or_int_literal ;
+    // Interp.g:100:1: print returns [PrintOperationElement ret] : 'print' var_or_int_literal ;
     public InterpParser.print_return print() // throws RecognitionException [1]
     {   
         InterpParser.print_return retval = new InterpParser.print_return();
@@ -1016,32 +1121,32 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken string_literal19 = null;
-        InterpParser.var_or_int_literal_return var_or_int_literal20 = null;
+        IToken string_literal21 = null;
+        InterpParser.var_or_int_literal_return var_or_int_literal22 = null;
 
 
-        object string_literal19_tree=null;
+        object string_literal21_tree=null;
 
 
           retval.ret = new PrintOperationElement();
 
         try 
     	{
-            // Interp.g:95:3: ( 'print' var_or_int_literal )
-            // Interp.g:95:5: 'print' var_or_int_literal
+            // Interp.g:104:3: ( 'print' var_or_int_literal )
+            // Interp.g:104:5: 'print' var_or_int_literal
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	string_literal19=(IToken)Match(input,18,FOLLOW_18_in_print401); 
-            		string_literal19_tree = (object)adaptor.Create(string_literal19);
-            		adaptor.AddChild(root_0, string_literal19_tree);
+            	string_literal21=(IToken)Match(input,18,FOLLOW_18_in_print456); 
+            		string_literal21_tree = (object)adaptor.Create(string_literal21);
+            		adaptor.AddChild(root_0, string_literal21_tree);
 
-            	PushFollow(FOLLOW_var_or_int_literal_in_print403);
-            	var_or_int_literal20 = var_or_int_literal();
+            	PushFollow(FOLLOW_var_or_int_literal_in_print458);
+            	var_or_int_literal22 = var_or_int_literal();
             	state.followingStackPointer--;
 
-            	adaptor.AddChild(root_0, var_or_int_literal20.Tree);
-            	retval.ret.setChildElement(((var_or_int_literal20 != null) ? var_or_int_literal20.ret : null)); 
+            	adaptor.AddChild(root_0, var_or_int_literal22.Tree);
+            	retval.ret.setChildElement(((var_or_int_literal22 != null) ? var_or_int_literal22.ret : null)); 
 
             }
 
@@ -1082,23 +1187,27 @@ public class InterpParser : Parser
     public static readonly BitSet FOLLOW_var_or_int_literal_in_assignment138 = new BitSet(new ulong[]{0x0000000000000020UL});
     public static readonly BitSet FOLLOW_matrix_in_assignment149 = new BitSet(new ulong[]{0x0000000000000020UL});
     public static readonly BitSet FOLLOW_addition_in_assignment159 = new BitSet(new ulong[]{0x0000000000000020UL});
-    public static readonly BitSet FOLLOW_SEMI_in_assignment169 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_var_or_int_literal185 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_int_literal_in_var_or_int_literal196 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_LBRACK_in_matrix221 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_row_in_matrix225 = new BitSet(new ulong[]{0x0000000000001020UL});
-    public static readonly BitSet FOLLOW_SEMI_in_matrix234 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_row_in_matrix238 = new BitSet(new ulong[]{0x0000000000001020UL});
-    public static readonly BitSet FOLLOW_RBRACK_in_matrix248 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_int_literal_in_row275 = new BitSet(new ulong[]{0x0000000000000402UL});
-    public static readonly BitSet FOLLOW_COMMA_in_row285 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_int_literal_in_row289 = new BitSet(new ulong[]{0x0000000000000402UL});
-    public static readonly BitSet FOLLOW_VARIABLE_in_variable318 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_INT_LITERAL_in_int_literal339 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_addition362 = new BitSet(new ulong[]{0x0000000000004000UL});
-    public static readonly BitSet FOLLOW_PLUS_in_addition371 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_addition380 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_18_in_print401 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_print403 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_multiplication_in_assignment169 = new BitSet(new ulong[]{0x0000000000000020UL});
+    public static readonly BitSet FOLLOW_SEMI_in_assignment179 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_var_or_int_literal195 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_int_literal_in_var_or_int_literal206 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_LBRACK_in_matrix231 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_row_in_matrix235 = new BitSet(new ulong[]{0x0000000000001020UL});
+    public static readonly BitSet FOLLOW_SEMI_in_matrix244 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_row_in_matrix248 = new BitSet(new ulong[]{0x0000000000001020UL});
+    public static readonly BitSet FOLLOW_RBRACK_in_matrix258 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_int_literal_in_row285 = new BitSet(new ulong[]{0x0000000000000402UL});
+    public static readonly BitSet FOLLOW_COMMA_in_row295 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_int_literal_in_row299 = new BitSet(new ulong[]{0x0000000000000402UL});
+    public static readonly BitSet FOLLOW_VARIABLE_in_variable328 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_INT_LITERAL_in_int_literal349 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_addition372 = new BitSet(new ulong[]{0x0000000000004000UL});
+    public static readonly BitSet FOLLOW_PLUS_in_addition381 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_addition390 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_multiplication417 = new BitSet(new ulong[]{0x0000000000010000UL});
+    public static readonly BitSet FOLLOW_MUL_in_multiplication426 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_multiplication435 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_18_in_print456 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_print458 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 }

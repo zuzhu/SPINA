@@ -44,9 +44,17 @@ public class MatrixElement : Element
         return numOfRows;
     }
 
+    public int GetNumOfCols()
+    {
+        if (rows.Count > 0)
+            return rows[0].Count();
+        else
+            return 0;
+    }
+
     public List<RowElement> getRows() { return rows; }
     public void setRows(List<RowElement> value) { rows = value; }
-    public void addRows(RowElement r) { rows.Add(r); }
+    public void addRows(RowElement r) { rows.Add(r); numOfRows++; }
     public bool isSameRowSize(RowElement r)
     {
         if (rows.Count > 0)
@@ -83,6 +91,37 @@ public class MatrixElement : Element
         return s.ToString();
     }
 
+    public List<int> Serialize()
+    {
+        List<int> allNumbers = new List<int>();
+        foreach (RowElement r in rows)
+        {
+            foreach (int item in r.getRow())
+            {
+                allNumbers.Add(item);
+            }
+        }
+        return allNumbers;
+    }
+
+    public void Reverse(out MatrixElement element)
+    {
+        element = new MatrixElement();
+
+        List<int> all = Serialize();
+        int cols = all.Count / numOfRows;
+
+        for (int i = 0; i < cols; ++i)
+        {
+            RowElement r = new RowElement();
+            for (int j = 0; j < numOfRows; ++j)
+            {
+                r.addElement(all[j * cols + i]);
+            }
+            element.addRows(r);
+        }
+    }
+
     public bool Addition(MatrixElement a, MatrixElement b, ref MatrixElement result)
     {
         Console.WriteLine("matrix addition");
@@ -109,8 +148,40 @@ public class MatrixElement : Element
 
     public bool Multiplication(MatrixElement a, MatrixElement b, ref MatrixElement result)
     {
-        Console.WriteLine("matrix multiplication");
-        
+        //Console.WriteLine("matrix multiplication");
+
+        int rowNumOfA = a.GetNumOfRows();
+        int colNumOfA = a.GetNumOfCols();
+
+        int rowNumOfB = b.GetNumOfRows();
+        int colNumOfB = b.GetNumOfCols();
+
+        MatrixElement reverseB = new MatrixElement();
+        b.Reverse(out reverseB);
+
+        List<RowElement> RowA = a.getRows();
+        List<RowElement> RowBReverse = reverseB.getRows();
+
+        for (int i = 0; i < rowNumOfA; ++i)
+        {
+            RowElement r = new RowElement();
+            RowElement partA = RowA[i];
+
+            for (int j = 0; j < colNumOfB; ++j)
+            {
+                int sum = 0;
+                RowElement partB = RowBReverse[j];
+                for (int k = 0; k < colNumOfA; ++k)
+                {
+                    int first = partA.getElement(k);
+                    int second = partB.getElement(k);
+                    sum += first * second;
+                }
+                r.addElement(sum);
+            }
+            result.addRows(r);
+        }
+
         return true;
     }
 }

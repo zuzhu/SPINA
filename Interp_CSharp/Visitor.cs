@@ -24,6 +24,7 @@ public abstract class Visitor {
   public abstract void VisitMatrixElement(MatrixElement element);
   public abstract void VisitAssignmentOperationElement(AssignmentOperationElement element);
   public abstract void VisitAdditionOperationElement(AdditionOperationElement element);
+  public abstract void VisitMultiplicationOperationElement(MultiplicationOperationElement element);
   public abstract void VisitPrintOperationElement(PrintOperationElement element);
 
   public void VisitElement(Element element){
@@ -35,8 +36,14 @@ public abstract class Visitor {
       VisitVariableElement(var_elem);
     } else if(element is AdditionOperationElement){
       AdditionOperationElement add_elem = (AdditionOperationElement) element;
-      VisitAdditionOperationElement(add_elem);          
-    } else if(element is AssignmentOperationElement){
+      VisitAdditionOperationElement(add_elem);
+    }
+    else if (element is MultiplicationOperationElement)
+    {
+        MultiplicationOperationElement multi_elem = (MultiplicationOperationElement)element;
+        VisitMultiplicationOperationElement(multi_elem);
+    }
+    else if (element is AssignmentOperationElement) {
       AssignmentOperationElement assign_elem = (AssignmentOperationElement) element;
       VisitAssignmentOperationElement(assign_elem);
     } else if (element is RowElement){

@@ -45,6 +45,7 @@ assignment returns [AssignmentOperationElement ret]
     (var_or_int_literal {retval.ret.setRhs($var_or_int_literal.ret); } 
     | matrix {retval.ret.setRhs($matrix.ret); }
     | addition {retval.ret.setRhs($addition.ret); }
+    | multiplication { retval.ret.setRhs($multiplication.ret); }
     ) SEMI;
 
 var_or_int_literal returns [Element ret]
@@ -56,7 +57,7 @@ matrix returns [MatrixElement ret]
   retval.ret = new MatrixElement();
 }
   : '[' e1=row { retval.ret.addRows($e1.ret); }
-    (';' e2=row { retval.ret.addRows($e2.ret); })*
+    (';' e2=row { retval.ret.addRows($e2.ret); retval.ret.Check($e2.ret); })*
     ']' 
   ;
   

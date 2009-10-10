@@ -36,6 +36,13 @@ public class PrettyPrintVisitor : Visitor {
     VisitElement(element.getRhs());
     Console.Write(" ");
   }
+  public override void VisitMultiplicationOperationElement(MultiplicationOperationElement element)
+  {
+      VisitElement(element.getLhs());
+      Console.Write("* ");
+      VisitElement(element.getRhs());
+      Console.Write(" ");
+  }
   public override void VisitPrintOperationElement(PrintOperationElement element){
     Console.Write("function:print ");
     VisitElement(element.getChildElement());
@@ -49,7 +56,14 @@ public class PrettyPrintVisitor : Visitor {
 
   public override void VisitMatrixElement(MatrixElement element)
   {
-      Console.WriteLine("VisitMatrixElement");
-
+      foreach (RowElement r in element.getRows())
+      {
+          foreach (int item in r.getRow())
+          {
+              Console.Write(item.ToString() + ", ");
+          }
+          Console.Write("; ");
+      }
+      Console.WriteLine();
   }
 }

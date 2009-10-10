@@ -63,6 +63,16 @@ public class InterpreterVisitor : Visitor {
     bool ret = lhs.Addition(lhs, rhs, ref result);
     mStack.Push(result);    
   }
+  public override void VisitMultiplicationOperationElement(MultiplicationOperationElement element)
+  {
+      VisitElement(element.getLhs());
+      VisitElement(element.getRhs());
+      MatrixElement rhs = mStack.Pop();
+      MatrixElement lhs = mStack.Pop();
+      MatrixElement result = new MatrixElement();
+      bool ret = lhs.Multiplication(lhs, rhs, ref result);
+      mStack.Push(result);
+  }
   public override void VisitPrintOperationElement(PrintOperationElement element){
     VisitElement(element.getChildElement());
     MatrixElement result = mStack.Pop();
@@ -71,7 +81,7 @@ public class InterpreterVisitor : Visitor {
 
   public override void VisitRowElement(RowElement element)
   {
-      Console.WriteLine("VisitRowElement");
+      //Console.WriteLine("VisitRowElement");
       List<int> row = element.getRow();
       for (int i = 0; i < element.Count(); ++i)
       {
@@ -82,7 +92,7 @@ public class InterpreterVisitor : Visitor {
 
   public override void VisitMatrixElement(MatrixElement element)
   {
-      Console.WriteLine("VisitMatrixElement");
+      //Console.WriteLine("VisitMatrixElement");
       //MatrixElement element_value = int.Parse(element.getText());
       mStack.Push(element);
   }

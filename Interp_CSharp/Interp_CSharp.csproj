@@ -51,6 +51,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -69,6 +71,7 @@
     <Compile Include="InterpParser.cs" />
     <Compile Include="InterpreterVisitor.cs" />
     <Compile Include="MatrixElement.cs" />
+    <Compile Include="MultiplicationOperationElement.cs" />
     <Compile Include="PrettyPrintVisitor.cs" />
     <Compile Include="PrintOperationElement.cs" />
     <Compile Include="Program.cs" />

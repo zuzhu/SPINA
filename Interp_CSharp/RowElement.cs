@@ -14,6 +14,7 @@
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 using System;
+using System.Text;
 using System.Collections.Generic;
 
 public class RowElement : Element
@@ -29,6 +30,17 @@ public class RowElement : Element
     public RowElement()
     {
         rowElements = new List<int>();
+    }
+
+    public override string ToString()
+    {
+        StringBuilder s = new StringBuilder("");
+        foreach (int item in rowElements)
+        {
+            s.Append(item.ToString() + ", ");
+        }
+
+        return s.ToString();
     }
 
     public List<int> getRow() { return rowElements; }
