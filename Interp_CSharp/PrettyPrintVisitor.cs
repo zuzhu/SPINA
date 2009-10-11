@@ -15,6 +15,7 @@
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 using System;
+using System.Collections.Generic;
 
 public class PrettyPrintVisitor : Visitor {
 
@@ -30,13 +31,20 @@ public class PrettyPrintVisitor : Visitor {
     VisitElement(element.getRhs());
     Console.WriteLine(";");
   }
-  public override void VisitAdditionOperationElement(AdditionOperationElement element){
+  public override void VisitAdditionOperationElement(AdditionOperationElement element)
+  {
+      VisitElement(element.getLhs());
+      Console.Write("+ ");
+      VisitElement(element.getRhs());
+      Console.Write(" ");
+  }
+  public override void VisitMatrixAdditionOperationElement(MatrixAdditionOperationElement element){
     VisitElement(element.getLhs());
     Console.Write("+ ");
     VisitElement(element.getRhs());
     Console.Write(" ");
   }
-  public override void VisitMultiplicationOperationElement(MultiplicationOperationElement element)
+  public override void VisitMatrixMultiplicationOperationElement(MatrixMultiplicationOperationElement element)
   {
       VisitElement(element.getLhs());
       Console.Write("* ");
@@ -54,16 +62,81 @@ public class PrettyPrintVisitor : Visitor {
 
   }
 
+  public override void VisitVectorIndexElement(VectorIndexElement element)
+  {
+      Console.WriteLine("VisitVectorIndexElement");
+  }
+
+  public override void VisitParallelForOperationElement(ParallelForOperationElement element)
+  {
+      Console.WriteLine("VisitParallelFor ...");
+  }
+
+  public override void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element)
+  {
+      Console.WriteLine("VisitParallelAdd ...");
+  }
+
+  public override void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element)
+  {
+      Console.WriteLine("VisitParallelAssignment ...");
+  }
+
+  private void PrintRow(List<RowElement> rows, int index)
+  {
+      RowElement r = rows[index];
+      if (r.Count() < 1)
+      {
+          return;
+      }
+      else
+      {
+          Console.Write(r.getElement(0));
+          for (int i = 1; i < r.Count(); ++i)
+          {
+              Console.Write(", " + r.getElement(i));
+          }
+      }
+  }
+
   public override void VisitMatrixElement(MatrixElement element)
   {
-      foreach (RowElement r in element.getRows())
+      List<RowElement> rows = element.getRows();
+      int numOfRows = rows.Count;
+      if (numOfRows < 1)
       {
-          foreach (int item in r.getRow())
-          {
-              Console.Write(item.ToString() + ", ");
-          }
-          Console.Write("; ");
+          return;
       }
-      Console.WriteLine();
+      else
+      {
+
+          if (numOfRows == 1)
+          {
+              Console.Write("[");
+              PrintRow(rows, 0);
+              Console.WriteLine("]");
+          }
+          else
+          {
+              Console.Write("[");
+              PrintRow(rows, 0);
+              for (int i = 1; i < numOfRows; ++i)
+              {
+                  Console.Write(";");
+                  Console.WriteLine();
+                  PrintRow(rows, i);
+              }
+              Console.WriteLine("]");
+          }
+      }
+      //foreach (RowElement r in element.getRows())
+      //{
+      //    foreach (int item in r.getRow())
+      //    {
+      //        Console.Write(item.ToString() + ", ");
+      //    }
+      //    Console.Write("; ");
+      //}
+      //Console.WriteLine();
   }
 }

@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-09 21:14:49
+// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-10 21:45:31
 
 
 using System.Collections.Generic;
@@ -13,21 +13,25 @@ using Stack 		= Antlr.Runtime.Collections.StackList;
 
 public class InterpLexer : Lexer {
     public const int RBRACK = 12;
-    public const int RPAREN = 9;
     public const int INT_LITERAL = 7;
     public const int LBRACK = 11;
-    public const int VARIABLE = 6;
-    public const int T__18 = 18;
-    public const int COMMA = 10;
+    public const int T__22 = 22;
+    public const int T__21 = 21;
+    public const int T__20 = 20;
     public const int WHITESPACE = 17;
+    public const int MINUS = 15;
+    public const int EOF = -1;
+    public const int MUL = 16;
+    public const int SEMI = 5;
+    public const int LPAREN = 8;
+    public const int T__19 = 19;
+    public const int RPAREN = 9;
+    public const int T__18 = 18;
+    public const int VARIABLE = 6;
+    public const int COMMA = 10;
     public const int PLUS = 14;
     public const int ASSIGNMENT = 4;
-    public const int MINUS = 15;
     public const int DOT = 13;
-    public const int EOF = -1;
-    public const int SEMI = 5;
-    public const int MUL = 16;
-    public const int LPAREN = 8;
 
     // delegates
     // delegators
@@ -74,6 +78,100 @@ public class InterpLexer : Lexer {
     }
     // $ANTLR end "T__18"
 
+    // $ANTLR start "T__19"
+    public void mT__19() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__19;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Interp.g:12:7: ( 'parallel-for' )
+            // Interp.g:12:9: 'parallel-for'
+            {
+            	Match("parallel-for"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__19"
+
+    // $ANTLR start "T__20"
+    public void mT__20() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__20;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Interp.g:13:7: ( '..' )
+            // Interp.g:13:9: '..'
+            {
+            	Match(".."); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__20"
+
+    // $ANTLR start "T__21"
+    public void mT__21() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__21;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Interp.g:14:7: ( '{' )
+            // Interp.g:14:9: '{'
+            {
+            	Match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__21"
+
+    // $ANTLR start "T__22"
+    public void mT__22() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__22;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Interp.g:15:7: ( '}' )
+            // Interp.g:15:9: '}'
+            {
+            	Match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__22"
+
     // $ANTLR start "LPAREN"
     public void mLPAREN() // throws RecognitionException [2]
     {
@@ -81,8 +179,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = LPAREN;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:111:8: ( '(' )
-            // Interp.g:111:10: '('
+            // Interp.g:172:8: ( '(' )
+            // Interp.g:172:10: '('
             {
             	Match('('); 
 
@@ -104,8 +202,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = RPAREN;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:112:8: ( ')' )
-            // Interp.g:112:10: ')'
+            // Interp.g:173:8: ( ')' )
+            // Interp.g:173:10: ')'
             {
             	Match(')'); 
 
@@ -127,8 +225,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = COMMA;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:113:7: ( ',' )
-            // Interp.g:113:9: ','
+            // Interp.g:174:7: ( ',' )
+            // Interp.g:174:9: ','
             {
             	Match(','); 
 
@@ -150,8 +248,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = LBRACK;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:114:8: ( '[' )
-            // Interp.g:114:10: '['
+            // Interp.g:175:8: ( '[' )
+            // Interp.g:175:10: '['
             {
             	Match('['); 
 
@@ -173,8 +271,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = RBRACK;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:115:8: ( ']' )
-            // Interp.g:115:10: ']'
+            // Interp.g:176:8: ( ']' )
+            // Interp.g:176:10: ']'
             {
             	Match(']'); 
 
@@ -196,8 +294,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = SEMI;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:116:6: ( ';' )
-            // Interp.g:116:8: ';'
+            // Interp.g:177:6: ( ';' )
+            // Interp.g:177:8: ';'
             {
             	Match(';'); 
 
@@ -219,8 +317,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = DOT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:117:5: ( '.' )
-            // Interp.g:117:7: '.'
+            // Interp.g:178:5: ( '.' )
+            // Interp.g:178:7: '.'
             {
             	Match('.'); 
 
@@ -242,8 +340,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = PLUS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:119:5: ( '+' )
-            // Interp.g:119:7: '+'
+            // Interp.g:180:5: ( '+' )
+            // Interp.g:180:7: '+'
             {
             	Match('+'); 
 
@@ -265,8 +363,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = MINUS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:120:7: ( '-' )
-            // Interp.g:120:9: '-'
+            // Interp.g:181:7: ( '-' )
+            // Interp.g:181:9: '-'
             {
             	Match('-'); 
 
@@ -288,8 +386,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = MUL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:121:5: ( '*' )
-            // Interp.g:121:7: '*'
+            // Interp.g:182:5: ( '*' )
+            // Interp.g:182:7: '*'
             {
             	Match('*'); 
 
@@ -311,8 +409,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = ASSIGNMENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:123:11: ( '=' )
-            // Interp.g:123:13: '='
+            // Interp.g:184:11: ( '=' )
+            // Interp.g:184:13: '='
             {
             	Match('='); 
 
@@ -334,10 +432,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = VARIABLE;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:124:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // Interp.g:124:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // Interp.g:185:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // Interp.g:185:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            	// Interp.g:124:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            	// Interp.g:185:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             	int cnt1 = 0;
             	do 
             	{
@@ -401,10 +499,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = INT_LITERAL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:125:12: ( ( '0' .. '9' )+ )
-            // Interp.g:125:14: ( '0' .. '9' )+
+            // Interp.g:186:12: ( ( '0' .. '9' )+ )
+            // Interp.g:186:14: ( '0' .. '9' )+
             {
-            	// Interp.g:125:14: ( '0' .. '9' )+
+            	// Interp.g:186:14: ( '0' .. '9' )+
             	int cnt2 = 0;
             	do 
             	{
@@ -420,7 +518,7 @@ public class InterpLexer : Lexer {
             	    switch (alt2) 
             		{
             			case 1 :
-            			    // Interp.g:125:15: '0' .. '9'
+            			    // Interp.g:186:15: '0' .. '9'
             			    {
             			    	MatchRange('0','9'); 
 
@@ -458,10 +556,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = WHITESPACE;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:126:12: ( ( ' ' | '\\t' | '\\n' | '\\r' )+ )
-            // Interp.g:126:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
+            // Interp.g:187:12: ( ( ' ' | '\\t' | '\\n' | '\\r' )+ )
+            // Interp.g:187:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
             {
-            	// Interp.g:126:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
+            	// Interp.g:187:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
             	int cnt3 = 0;
             	do 
             	{
@@ -521,8 +619,8 @@ public class InterpLexer : Lexer {
 
     override public void mTokens() // throws RecognitionException 
     {
-        // Interp.g:1:8: ( T__18 | LPAREN | RPAREN | COMMA | LBRACK | RBRACK | SEMI | DOT | PLUS | MINUS | MUL | ASSIGNMENT | VARIABLE | INT_LITERAL | WHITESPACE )
-        int alt4 = 15;
+        // Interp.g:1:8: ( T__18 | T__19 | T__20 | T__21 | T__22 | LPAREN | RPAREN | COMMA | LBRACK | RBRACK | SEMI | DOT | PLUS | MINUS | MUL | ASSIGNMENT | VARIABLE | INT_LITERAL | WHITESPACE )
+        int alt4 = 19;
         alt4 = dfa4.Predict(input);
         switch (alt4) 
         {
@@ -534,98 +632,126 @@ public class InterpLexer : Lexer {
                 }
                 break;
             case 2 :
-                // Interp.g:1:16: LPAREN
+                // Interp.g:1:16: T__19
+                {
+                	mT__19(); 
+
+                }
+                break;
+            case 3 :
+                // Interp.g:1:22: T__20
+                {
+                	mT__20(); 
+
+                }
+                break;
+            case 4 :
+                // Interp.g:1:28: T__21
+                {
+                	mT__21(); 
+
+                }
+                break;
+            case 5 :
+                // Interp.g:1:34: T__22
+                {
+                	mT__22(); 
+
+                }
+                break;
+            case 6 :
+                // Interp.g:1:40: LPAREN
                 {
                 	mLPAREN(); 
 
                 }
                 break;
-            case 3 :
-                // Interp.g:1:23: RPAREN
+            case 7 :
+                // Interp.g:1:47: RPAREN
                 {
                 	mRPAREN(); 
 
                 }
                 break;
-            case 4 :
-                // Interp.g:1:30: COMMA
+            case 8 :
+                // Interp.g:1:54: COMMA
                 {
                 	mCOMMA(); 
 
                 }
                 break;
-            case 5 :
-                // Interp.g:1:36: LBRACK
+            case 9 :
+                // Interp.g:1:60: LBRACK
                 {
                 	mLBRACK(); 
 
                 }
                 break;
-            case 6 :
-                // Interp.g:1:43: RBRACK
+            case 10 :
+                // Interp.g:1:67: RBRACK
                 {
                 	mRBRACK(); 
 
                 }
                 break;
-            case 7 :
-                // Interp.g:1:50: SEMI
+            case 11 :
+                // Interp.g:1:74: SEMI
                 {
                 	mSEMI(); 
 
                 }
                 break;
-            case 8 :
-                // Interp.g:1:55: DOT
+            case 12 :
+                // Interp.g:1:79: DOT
                 {
                 	mDOT(); 
 
                 }
                 break;
-            case 9 :
-                // Interp.g:1:59: PLUS
+            case 13 :
+                // Interp.g:1:83: PLUS
                 {
                 	mPLUS(); 
 
                 }
                 break;
-            case 10 :
-                // Interp.g:1:64: MINUS
+            case 14 :
+                // Interp.g:1:88: MINUS
                 {
                 	mMINUS(); 
 
                 }
                 break;
-            case 11 :
-                // Interp.g:1:70: MUL
+            case 15 :
+                // Interp.g:1:94: MUL
                 {
                 	mMUL(); 
 
                 }
                 break;
-            case 12 :
-                // Interp.g:1:74: ASSIGNMENT
+            case 16 :
+                // Interp.g:1:98: ASSIGNMENT
                 {
                 	mASSIGNMENT(); 
 
                 }
                 break;
-            case 13 :
-                // Interp.g:1:85: VARIABLE
+            case 17 :
+                // Interp.g:1:109: VARIABLE
                 {
                 	mVARIABLE(); 
 
                 }
                 break;
-            case 14 :
-                // Interp.g:1:94: INT_LITERAL
+            case 18 :
+                // Interp.g:1:118: INT_LITERAL
                 {
                 	mINT_LITERAL(); 
 
                 }
                 break;
-            case 15 :
-                // Interp.g:1:106: WHITESPACE
+            case 19 :
+                // Interp.g:1:130: WHITESPACE
                 {
                 	mWHITESPACE(); 
 
@@ -644,27 +770,32 @@ public class InterpLexer : Lexer {
 	}
 
     const string DFA4_eotS =
-        "\x01\uffff\x01\x0d\x0e\uffff\x03\x0d\x01\x14\x01\uffff";
+        "\x01\uffff\x01\x0f\x01\x15\x0f\uffff\x02\x0f\x02\uffff\x04\x0f"+
+        "\x01\x1c\x01\x0f\x01\uffff\x03\x0f\x01\uffff";
     const string DFA4_eofS =
-        "\x15\uffff";
+        "\x21\uffff";
     const string DFA4_minS =
-        "\x01\x09\x01\x72\x0e\uffff\x01\x69\x01\x6e\x01\x74\x01\x41\x01"+
-        "\uffff";
+        "\x01\x09\x01\x61\x01\x2e\x0f\uffff\x01\x69\x01\x72\x02\uffff\x01"+
+        "\x6e\x01\x61\x01\x74\x01\x6c\x01\x41\x01\x6c\x01\uffff\x01\x65\x01"+
+        "\x6c\x01\x2d\x01\uffff";
     const string DFA4_maxS =
-        "\x01\x7a\x01\x72\x0e\uffff\x01\x69\x01\x6e\x01\x74\x01\x7a\x01"+
-        "\uffff";
+        "\x01\x7d\x01\x72\x01\x2e\x0f\uffff\x01\x69\x01\x72\x02\uffff\x01"+
+        "\x6e\x01\x61\x01\x74\x01\x6c\x01\x7a\x01\x6c\x01\uffff\x01\x65\x01"+
+        "\x6c\x01\x2d\x01\uffff";
     const string DFA4_acceptS =
-        "\x02\uffff\x01\x02\x01\x03\x01\x04\x01\x05\x01\x06\x01\x07\x01"+
-        "\x08\x01\x09\x01\x0a\x01\x0b\x01\x0c\x01\x0d\x01\x0e\x01\x0f\x04"+
-        "\uffff\x01\x01";
+        "\x03\uffff\x01\x04\x01\x05\x01\x06\x01\x07\x01\x08\x01\x09\x01"+
+        "\x0a\x01\x0b\x01\x0d\x01\x0e\x01\x0f\x01\x10\x01\x11\x01\x12\x01"+
+        "\x13\x02\uffff\x01\x03\x01\x0c\x06\uffff\x01\x01\x03\uffff\x01\x02";
     const string DFA4_specialS =
-        "\x15\uffff}>";
+        "\x21\uffff}>";
     static readonly string[] DFA4_transitionS = {
-            "\x02\x0f\x02\uffff\x01\x0f\x12\uffff\x01\x0f\x07\uffff\x01"+
-            "\x02\x01\x03\x01\x0b\x01\x09\x01\x04\x01\x0a\x01\x08\x01\uffff"+
-            "\x0a\x0e\x01\uffff\x01\x07\x01\uffff\x01\x0c\x03\uffff\x1a\x0d"+
-            "\x01\x05\x01\uffff\x01\x06\x03\uffff\x0f\x0d\x01\x01\x0a\x0d",
-            "\x01\x10",
+            "\x02\x11\x02\uffff\x01\x11\x12\uffff\x01\x11\x07\uffff\x01"+
+            "\x05\x01\x06\x01\x0d\x01\x0b\x01\x07\x01\x0c\x01\x02\x01\uffff"+
+            "\x0a\x10\x01\uffff\x01\x0a\x01\uffff\x01\x0e\x03\uffff\x1a\x0f"+
+            "\x01\x08\x01\uffff\x01\x09\x03\uffff\x0f\x0f\x01\x01\x0a\x0f"+
+            "\x01\x03\x01\uffff\x01\x04",
+            "\x01\x13\x10\uffff\x01\x12",
+            "\x01\x14",
             "",
             "",
             "",
@@ -679,10 +810,21 @@ public class InterpLexer : Lexer {
             "",
             "",
             "",
-            "\x01\x11",
-            "\x01\x12",
-            "\x01\x13",
-            "\x1a\x0d\x06\uffff\x1a\x0d",
+            "",
+            "\x01\x16",
+            "\x01\x17",
+            "",
+            "",
+            "\x01\x18",
+            "\x01\x19",
+            "\x01\x1a",
+            "\x01\x1b",
+            "\x1a\x0f\x06\uffff\x1a\x0f",
+            "\x01\x1d",
+            "",
+            "\x01\x1e",
+            "\x01\x1f",
+            "\x01\x20",
             ""
     };
 
@@ -712,7 +854,7 @@ public class InterpLexer : Lexer {
 
         override public string Description
         {
-            get { return "1:1: Tokens : ( T__18 | LPAREN | RPAREN | COMMA | LBRACK | RBRACK | SEMI | DOT | PLUS | MINUS | MUL | ASSIGNMENT | VARIABLE | INT_LITERAL | WHITESPACE );"; }
+            get { return "1:1: Tokens : ( T__18 | T__19 | T__20 | T__21 | T__22 | LPAREN | RPAREN | COMMA | LBRACK | RBRACK | SEMI | DOT | PLUS | MINUS | MUL | ASSIGNMENT | VARIABLE | INT_LITERAL | WHITESPACE );"; }
         }
 
     }

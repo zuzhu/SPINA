@@ -24,8 +24,13 @@ public abstract class Visitor {
   public abstract void VisitMatrixElement(MatrixElement element);
   public abstract void VisitAssignmentOperationElement(AssignmentOperationElement element);
   public abstract void VisitAdditionOperationElement(AdditionOperationElement element);
-  public abstract void VisitMultiplicationOperationElement(MultiplicationOperationElement element);
+  public abstract void VisitMatrixAdditionOperationElement(MatrixAdditionOperationElement element);
+  public abstract void VisitMatrixMultiplicationOperationElement(MatrixMultiplicationOperationElement element);
   public abstract void VisitPrintOperationElement(PrintOperationElement element);
+  public abstract void VisitParallelForOperationElement(ParallelForOperationElement element);
+  public abstract void VisitVectorIndexElement(VectorIndexElement element);
+  public abstract void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element);
+  public abstract void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element);
 
   public void VisitElement(Element element){
     if(element is IntegerElement){
@@ -34,14 +39,20 @@ public abstract class Visitor {
     } else if(element is VariableElement){
       VariableElement var_elem = (VariableElement) element;
       VisitVariableElement(var_elem);
-    } else if(element is AdditionOperationElement){
-      AdditionOperationElement add_elem = (AdditionOperationElement) element;
-      VisitAdditionOperationElement(add_elem);
     }
-    else if (element is MultiplicationOperationElement)
+    else if (element is AdditionOperationElement)
     {
-        MultiplicationOperationElement multi_elem = (MultiplicationOperationElement)element;
-        VisitMultiplicationOperationElement(multi_elem);
+        AdditionOperationElement add_elem = (AdditionOperationElement)element;
+        VisitAdditionOperationElement(add_elem);
+    }
+    else if (element is MatrixAdditionOperationElement) {
+      MatrixAdditionOperationElement add_elem = (MatrixAdditionOperationElement) element;
+      VisitMatrixAdditionOperationElement(add_elem);
+    }
+    else if (element is MatrixMultiplicationOperationElement)
+    {
+        MatrixMultiplicationOperationElement multi_elem = (MatrixMultiplicationOperationElement)element;
+        VisitMatrixMultiplicationOperationElement(multi_elem);
     }
     else if (element is AssignmentOperationElement) {
       AssignmentOperationElement assign_elem = (AssignmentOperationElement) element;
@@ -54,6 +65,21 @@ public abstract class Visitor {
     {
         MatrixElement matrix_elem = (MatrixElement)element;
         VisitMatrixElement(matrix_elem);
+    }
+    else if (element is PrintOperationElement)
+    {
+        MatrixElement matrix_elem = (MatrixElement)element;
+        VisitMatrixElement(matrix_elem);
+    }
+    else if (element is ParallelForOperationElement)
+    {
+        // How to parallel
+    }
+    else if (element is VectorIndexElement)
+    {
+        // what to show here?
+        VectorIndexElement vec_elem = (VectorIndexElement)element;
+        VisitVectorIndexElement(vec_elem);
     }
   }
 

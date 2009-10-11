@@ -34,7 +34,8 @@ program returns [List<Element> ret]
 
 expr returns [Element ret]
   : assignment {retval.ret = $assignment.ret;}
-  | print { retval.ret = $print.ret; };
+  | print { retval.ret = $print.ret; }
+  | parallel_for { retval.ret = $parallel_for.ret; };
 
 assignment returns [AssignmentOperationElement ret]
 @init {
@@ -43,9 +44,10 @@ assignment returns [AssignmentOperationElement ret]
   : variable {retval.ret.setLhs($variable.ret); }
     ASSIGNMENT 
     (var_or_int_literal {retval.ret.setRhs($var_or_int_literal.ret); } 
+//    | addition {retval.ret.setRhs($addition.ret); }
     | matrix {retval.ret.setRhs($matrix.ret); }
-    | addition {retval.ret.setRhs($addition.ret); }
-    | multiplication { retval.ret.setRhs($multiplication.ret); }
+    | matrixaddition {retval.ret.setRhs($matrixaddition.ret); }
+    | matrixmultiplication { retval.ret.setRhs($matrixmultiplication.ret); }
     ) SEMI;
 
 var_or_int_literal returns [Element ret]
@@ -59,6 +61,13 @@ matrix returns [MatrixElement ret]
   : '[' e1=row { retval.ret.addRows($e1.ret); }
     (';' e2=row { retval.ret.addRows($e2.ret); retval.ret.Check($e2.ret); })*
     ']' 
+  ;
+
+scalar returns [ScalarElement ret]
+@init {
+  retval.ret = new ScalarElement();
+}
+  : '[' e1=row { retval.ret.addRow($e1.ret); } ']'
   ;
   
 row returns [RowElement ret]
@@ -88,10 +97,18 @@ addition returns [AdditionOperationElement ret]
   : el1=var_or_int_literal { retval.ret.setLhs($el1.ret); } 
     '+' 
     el2=var_or_int_literal { retval.ret.setRhs($el2.ret); };
-    
-multiplication returns [MultiplicationOperationElement ret]
+
+matrixaddition returns [MatrixAdditionOperationElement ret]
 @init {
-  retval.ret = new MultiplicationOperationElement();
+  retval.ret = new MatrixAdditionOperationElement();
+}
+  : el1=var_or_int_literal { retval.ret.setLhs($el1.ret); } 
+    '+' 
+    el2=var_or_int_literal { retval.ret.setRhs($el2.ret); };
+    
+matrixmultiplication returns [MatrixMultiplicationOperationElement ret]
+@init {
+  retval.ret = new MatrixMultiplicationOperationElement();
 }
   : el1=var_or_int_literal { retval.ret.setLhs($el1.ret); } 
     '*' 
@@ -103,6 +120,50 @@ print returns [PrintOperationElement ret]
 }
   : 'print' var_or_int_literal {retval.ret.setChildElement($var_or_int_literal.ret); }
   ; 
+
+parallel_for returns [ParallelForOperationElement ret]
+@init {
+  retval.ret = new ParallelForOperationElement();
+}
+  : 'parallel-for' '(' variable ASSIGNMENT low=int_literal '..' high=int_literal ')' '{' (parallelassignment {retval.ret.addExpression($parallelassignment.ret); } )* '}'
+  { retval.ret.setChildElement($variable.ret); retval.ret.setLowRange($low.ret); retval.ret.setHighRange($high.ret); }
+  ;
+
+parallelassignment returns [ParallelAssignmentOperationElement ret]
+@init {
+  retval.ret = new ParallelAssignmentOperationElement();
+}
+  : vectorindex {retval.ret.setLhs($vectorindex.ret); }
+    ASSIGNMENT 
+    (var_or_int_literal {retval.ret.setRhs($var_or_int_literal.ret); } 
+    | paralleladdition {retval.ret.setRhs($paralleladdition.ret); }
+    ) SEMI;
+
+paralleladdition returns [ParallelAdditionOperationElement ret]
+@init {
+  retval.ret = new ParallelAdditionOperationElement();
+}
+  : el1=vectorindex { retval.ret.setLhs($el1.ret); } 
+    '+' 
+    el2=vectorindex { retval.ret.setRhs($el2.ret); }
+    | 
+    el3=vectorindex { retval.ret.setLhs($el3.ret); }
+    '+'
+    el4=var_or_int_literal { retval.ret.setRhs($el4.ret); }
+    | 
+    el5=var_or_int_literal { retval.ret.setLhs($el5.ret); }
+    '+'
+    el6=vectorindex { retval.ret.setRhs($el6.ret); }
+    ;
+
+vectorindex returns [VectorIndexElement ret]
+@init {
+  retval.ret = new VectorIndexElement();
+}
+  : variable '[' var_or_int_literal ']' { retval.ret.setVariableElement($variable.ret); retval.ret.setFirstIndexElement($var_or_int_literal.ret); }
+  | variable '[' v1=var_or_int_literal ']' '[' v2=var_or_int_literal ']'
+  { retval.ret.setVariableElement($variable.ret); retval.ret.setFirstIndexElement($v1.ret); retval.ret.setSecondIndexElement($v2.ret); }
+  ;
 
 /*
  * Lexer Rules
