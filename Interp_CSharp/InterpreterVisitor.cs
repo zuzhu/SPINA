@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading;
 
 public class InterpreterVisitor : Visitor {
 
@@ -225,9 +226,20 @@ public class InterpreterVisitor : Visitor {
       mStack.Push(element);
   }
 
+
   public override void VisitParallelForOperationElement(ParallelForOperationElement element)
   {
       Console.WriteLine("VisitParallelFor");
+      element.Beta();
+      //int lower = element.getLowRange();
+      //int upper = element.getHighRange();
+      //for (int i = lower; i <= upper; ++i)
+      //{
+      //    //myThread m = new myThread();
+      //    Thread oThread = new Thread(new ThreadStart(element.Beta));
+      //    oThread.Start();
+
+      //}
   }
 
   public override void VisitVectorIndexElement(VectorIndexElement element)

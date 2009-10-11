@@ -15,6 +15,8 @@
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
+using System;
+using System.Threading;
 
 public class ParallelForOperationElement : Element
 {
@@ -38,11 +40,23 @@ public class ParallelForOperationElement : Element
     public int getLowRange() { return lowbound; }
     public void setLowRange(IntegerElement e) { lowbound = int.Parse(e.getText()); }
 
-    public int setHighRange() { return uppbound; }
+    public int getHighRange() { return uppbound; }
     public void setHighRange(IntegerElement e) { uppbound = int.Parse(e.getText()); }
 
     public override void Accept(Visitor visitor)
     {
         visitor.VisitParallelForOperationElement(this);
+    }
+
+    public void Beta()
+    {
+        for (int i = lowbound; i <= uppbound; ++i)
+        {
+            myThread m = new myThread();
+            m.setIndex(i);
+            m.setChildElement(this.mChildElement);
+            Thread oThread = new Thread(new ThreadStart(m.Beta));
+            oThread.Start();
+        }
     }
 }

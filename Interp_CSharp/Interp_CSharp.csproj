@@ -73,6 +73,7 @@
     <Compile Include="InterpreterVisitor.cs" />
     <Compile Include="MatrixElement.cs" />
     <Compile Include="MatrixMultiplicationOperationElement.cs" />
+    <Compile Include="myThread.cs" />
     <Compile Include="ParallelAdditionOperationElement.cs" />
     <Compile Include="ParallelAssignmentOperationElement.cs" />
     <Compile Include="ParallelForOperationElement.cs" />
