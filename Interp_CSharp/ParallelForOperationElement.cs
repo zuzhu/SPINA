@@ -25,6 +25,7 @@ public class ParallelForOperationElement : Element
     List<Element> mExpressionElement;
     int lowbound;
     int uppbound;
+    Visitor visitor;
 
     public ParallelForOperationElement()
     {
@@ -35,6 +36,7 @@ public class ParallelForOperationElement : Element
     public void setChildElement(Element value) { mChildElement = value; }
 
     public List<Element> getExpressionElement() { return mExpressionElement; }
+    public void setExpressionElement(List<Element> value) { mExpressionElement = value; }
     public void addExpression(Element e) { mExpressionElement.Add(e); }
 
     public int getLowRange() { return lowbound; }
@@ -45,6 +47,7 @@ public class ParallelForOperationElement : Element
 
     public override void Accept(Visitor visitor)
     {
+        this.visitor = visitor;
         visitor.VisitParallelForOperationElement(this);
     }
 
@@ -55,6 +58,8 @@ public class ParallelForOperationElement : Element
             myThread m = new myThread();
             m.setIndex(i);
             m.setChildElement(this.mChildElement);
+            m.setExpressionElement(this.mExpressionElement);
+            m.setVisitor(visitor);
             Thread oThread = new Thread(new ThreadStart(m.Beta));
             oThread.Start();
         }

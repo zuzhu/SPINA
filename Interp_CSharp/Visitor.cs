@@ -74,6 +74,8 @@ public abstract class Visitor {
     else if (element is ParallelForOperationElement)
     {
         // How to parallel
+        ParallelForOperationElement pf = (ParallelForOperationElement)element;
+        VisitParallelForOperationElement(pf);
     }
     else if (element is VectorIndexElement)
     {

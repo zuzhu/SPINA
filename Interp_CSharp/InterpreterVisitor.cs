@@ -27,6 +27,7 @@ public class InterpreterVisitor : Visitor {
   Stack<IntegerElement> mIntStack;
   Dictionary<String, Element> mDict;
   Queue<int> mQueue;
+  SampleDelegate d1;
 
   public InterpreterVisitor(){
     mVariableMap = new Hashtable();
@@ -36,6 +37,8 @@ public class InterpreterVisitor : Visitor {
     mDict = new Dictionary<string, Element>();
     mQueue = new Queue<int>();
   }
+
+  public void setDelegate(SampleDelegate value) { d1 = value; }
 
   public override void VisitVariableElement(VariableElement element){
     if(mVariableMap.ContainsKey(element.getText())){
@@ -154,9 +157,11 @@ public class InterpreterVisitor : Visitor {
       else
       {
           Console.Write(r.getElement(0));
+          d1(r.getElement(0).ToString());
           for (int i = 1; i < r.Count(); ++i)
           {
               Console.Write(", " + r.getElement(i));
+              d1(", " + r.getElement(i).ToString());
           }
       }
   }
@@ -180,20 +185,26 @@ public class InterpreterVisitor : Visitor {
             if (numOfRows == 1)
             {
                 Console.Write("[");
+                d1("[");
                 PrintRow(rows, 0);
                 Console.WriteLine("]");
+                d1("]");
             }
             else
             {
                 Console.Write("[");
+                d1("[");
                 PrintRow(rows, 0);
                 for (int i = 1; i < numOfRows; ++i)
                 {
                     Console.Write(";");
+                    d1(";");
+                    d1("\n");
                     Console.WriteLine();
                     PrintRow(rows, i);
                 }
                 Console.WriteLine("]");
+                d1("]");
             }
         }
     }
@@ -201,6 +212,7 @@ public class InterpreterVisitor : Visitor {
     {
         IntegerElement result = mIntStack.Pop();
         Console.WriteLine(int.Parse(result.getText()));
+        d1(int.Parse(result.getText()).ToString());
     }
     //MatrixElement result = mStack.Pop();
     //Console.WriteLine(result.ToString());
@@ -215,8 +227,10 @@ public class InterpreterVisitor : Visitor {
       for (int i = 0; i < element.Count(); ++i)
       {
           Console.Write(row[i] + " ");
+          d1(row[i].ToString() + " ");
       }
       Console.WriteLine();
+      d1("\n");
   }
 
   public override void VisitMatrixElement(MatrixElement element)
@@ -230,6 +244,7 @@ public class InterpreterVisitor : Visitor {
   public override void VisitParallelForOperationElement(ParallelForOperationElement element)
   {
       Console.WriteLine("VisitParallelFor");
+      d1("VisitParallelFor");
       element.Beta();
       //int lower = element.getLowRange();
       //int upper = element.getHighRange();
@@ -245,16 +260,18 @@ public class InterpreterVisitor : Visitor {
   public override void VisitVectorIndexElement(VectorIndexElement element)
   {
       Console.WriteLine("VisitVectorIndex");
+      d1("VisitVectorIndex");
 
   }
   public override void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element)
   {
       Console.WriteLine("VisitParallelAddition");
+      d1("VisitParallelAddition");
 
   }
   public override void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element)
   {
       Console.WriteLine("VisitParallelAssignment");
-
+      d1("VisitParallelAssignment"); 
   }
 }

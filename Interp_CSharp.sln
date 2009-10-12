@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interp_CSharp", "Interp_CSharp\Interp_CSharp.csproj", "{448CB956-2345-45AB-AF49-D71C0FA922C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "..\UI\UI.csproj", "{2ED1517B-EBF7-4468-9573-7A86C5DF7D88}"
+	ProjectSection(ProjectDependencies) = postProject
+		{448CB956-2345-45AB-AF49-D71C0FA922C9} = {448CB956-2345-45AB-AF49-D71C0FA922C9}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +18,10 @@ Global
 		{448CB956-2345-45AB-AF49-D71C0FA922C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{448CB956-2345-45AB-AF49-D71C0FA922C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{448CB956-2345-45AB-AF49-D71C0FA922C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED1517B-EBF7-4468-9573-7A86C5DF7D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED1517B-EBF7-4468-9573-7A86C5DF7D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED1517B-EBF7-4468-9573-7A86C5DF7D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED1517B-EBF7-4468-9573-7A86C5DF7D88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

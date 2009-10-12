@@ -35,7 +35,9 @@ program returns [List<Element> ret]
 expr returns [Element ret]
   : assignment {retval.ret = $assignment.ret;}
   | print { retval.ret = $print.ret; }
-  | parallel_for { retval.ret = $parallel_for.ret; };
+  | parallel_for { retval.ret = $parallel_for.ret; }
+//  | quit { retval.ret = $quit.ret; }
+  ;
 
 assignment returns [AssignmentOperationElement ret]
 @init {
@@ -59,7 +61,7 @@ matrix returns [MatrixElement ret]
   retval.ret = new MatrixElement();
 }
   : '[' e1=row { retval.ret.addRows($e1.ret); }
-    (';' e2=row { retval.ret.addRows($e2.ret); retval.ret.Check($e2.ret); })*
+    ('|' e2=row { retval.ret.addRows($e2.ret); retval.ret.Check($e2.ret); })*
     ']' 
   ;
 
@@ -118,8 +120,14 @@ print returns [PrintOperationElement ret]
 @init {
   retval.ret = new PrintOperationElement();
 }
-  : 'print' var_or_int_literal {retval.ret.setChildElement($var_or_int_literal.ret); }
+  : 'print' var_or_int_literal {retval.ret.setChildElement($var_or_int_literal.ret); } SEMI
   ; 
+
+//quit returns [QuitOperationElement ret]
+//@init {
+//  retval.ret = new QuitOperationElement();
+//}
+//  : 'quit' SEMI {retval.ret.setText(); };
 
 parallel_for returns [ParallelForOperationElement ret]
 @init {
@@ -176,6 +184,7 @@ LBRACK : '[' ;
 RBRACK : ']' ;
 SEMI : ';' ;
 DOT : '.' ;
+SEP : '|' ;
 
 PLUS: '+';
 MINUS : '-';
