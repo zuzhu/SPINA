@@ -19,42 +19,57 @@ using System.Collections.Generic;
 
 public class PrettyPrintVisitor : Visitor {
 
+  SampleDelegate d1;
+  public void setDelegate(SampleDelegate value) { d1 = value; }
+
   public override void VisitVariableElement(VariableElement element){
     Console.Write("var:" + element.getText() + " ");
+    d1("var:" + element.getText() + " ");
   }
   public override void VisitIntegerElement(IntegerElement element){
     Console.Write("int:" + element.getText() + " ");
+    d1("int:" + element.getText() + " ");
   }
   public override void VisitAssignmentOperationElement(AssignmentOperationElement element){
     VisitElement(element.getLhs());
     Console.Write(":= ");
+    d1(":= ");
     VisitElement(element.getRhs());
     Console.WriteLine(";");
+    d1(";\n");
   }
   public override void VisitAdditionOperationElement(AdditionOperationElement element)
   {
       VisitElement(element.getLhs());
       Console.Write("+ ");
+      d1("+ ");
       VisitElement(element.getRhs());
       Console.Write(" ");
+      d1(" ");
   }
   public override void VisitMatrixAdditionOperationElement(MatrixAdditionOperationElement element){
     VisitElement(element.getLhs());
     Console.Write("+ ");
+    d1("+ ");
     VisitElement(element.getRhs());
     Console.Write(" ");
+    d1(" ");
   }
   public override void VisitMatrixMultiplicationOperationElement(MatrixMultiplicationOperationElement element)
   {
       VisitElement(element.getLhs());
       Console.Write("* ");
+      d1("* ");
       VisitElement(element.getRhs());
       Console.Write(" ");
+      d1(" ");
   }
   public override void VisitPrintOperationElement(PrintOperationElement element){
     Console.Write("function:print ");
+    d1("function:print ");
     VisitElement(element.getChildElement());
     Console.WriteLine(";");
+    d1(";\n");
   }
   public override void VisitRowElement(RowElement element)
   {
@@ -65,6 +80,16 @@ public class PrettyPrintVisitor : Visitor {
   public override void VisitVectorIndexElement(VectorIndexElement element)
   {
       Console.WriteLine("VisitVectorIndexElement");
+  }
+
+  public override void VisitVectorIndexElementNew(VectorIndexElement element)
+  {
+      Console.WriteLine("VisitVectorIndexElementNew");
+  }
+
+  public override void VisitParallelElement(ParallelElement element)
+  {
+      Console.WriteLine("VisitParallelElement");
   }
 
   public override void VisitParallelForOperationElement(ParallelForOperationElement element)

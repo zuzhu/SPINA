@@ -15,11 +15,14 @@
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 
-public class ParallelAssignmentOperationElement : Element
+public class ParallelAssignmentOperationElement : ParallelElement
 {
 
     VectorIndexElement mLhs;
     Element mRhs;
+    //VariableElement mVar;
+    //int value;
+    //bool isVarSet = false;
 
     public override void Accept(Visitor visitor)
     {
@@ -31,4 +34,11 @@ public class ParallelAssignmentOperationElement : Element
 
     public Element getRhs() { return mRhs; }
     public void setRhs(Element rhs) { mRhs = rhs; }
+
+    //public int getValue() { return value; }
+    //public void setValue(int value) { this.value = value; }
+
+    //public VariableElement getVariable() { return mVar; }
+    //public void setVariable(VariableElement var) { mVar = var; isVarSet = true; }
+    //public bool getVarSetFlag() { return isVarSet; }
 }

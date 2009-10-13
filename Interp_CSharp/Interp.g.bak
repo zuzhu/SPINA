@@ -184,6 +184,7 @@ LBRACK : '[' ;
 RBRACK : ']' ;
 SEMI : ';' ;
 DOT : '.' ;
+SEP : '|' ;
 
 PLUS: '+';
 MINUS : '-';

@@ -53,6 +53,7 @@ public class ParallelForOperationElement : Element
 
     public void Beta()
     {
+        // For debugging purpose, change uppbound to lowbound
         for (int i = lowbound; i <= uppbound; ++i)
         {
             myThread m = new myThread();

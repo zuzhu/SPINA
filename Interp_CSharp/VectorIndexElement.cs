@@ -15,16 +15,16 @@
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 
-public class VectorIndexElement : Element
+public class VectorIndexElement : ParallelElement
 {
 
     Element mChildElement;
     Element mFirstIndexElement;
     Element mSecondIndexElement;
-
-    //public VectorIndexElement()
-    //{
-    //}
+    //VariableElement mVar;
+    //int value;
+    bool hasSecond = false;
+    //bool isVarSet = false;
 
     public Element getVariableElement() { return mChildElement; }
     public void setVariableElement(Element value) { mChildElement = value; }
@@ -33,7 +33,17 @@ public class VectorIndexElement : Element
     public void setFirstIndexElement(Element value) { mFirstIndexElement = value; }
 
     public Element getSecondIndexElement() { return mSecondIndexElement; }
-    public void setSecondIndexElement(Element value) { mSecondIndexElement = value; }
+    public void setSecondIndexElement(Element value) { mSecondIndexElement = value; hasSecond = true; }
+
+    public bool HasSecond() { return hasSecond; }
+    public void setHasSecond(bool value) { hasSecond = value; }
+
+    //public int getValue() { return value; }
+    //public void setValue(int value) { this.value = value; }
+
+    //public VariableElement getVariable() { return mVar; }
+    //public void setVariable(VariableElement var) { mVar = var; isVarSet = true; }
+    //public bool getVarSetFlag() { return isVarSet; }
 
     public override void Accept(Visitor visitor)
     {

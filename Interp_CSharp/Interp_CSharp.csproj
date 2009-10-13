@@ -78,6 +78,7 @@
     <Compile Include="myThread.cs" />
     <Compile Include="ParallelAdditionOperationElement.cs" />
     <Compile Include="ParallelAssignmentOperationElement.cs" />
+    <Compile Include="ParallelElement.cs" />
     <Compile Include="ParallelForOperationElement.cs" />
     <Compile Include="PrettyPrintVisitor.cs" />
     <Compile Include="PrintOperationElement.cs" />

@@ -39,6 +39,17 @@ public class MatrixElement : Element
         rows = new List<RowElement>();
     }
 
+    public bool setValue(int rowNum, int colNum, int value)
+    {
+        if (rowNum > numOfRows)
+            return false;
+        RowElement r = rows[rowNum];
+        if (colNum > r.Count())
+            return false;
+        (r.getRow())[colNum] = value;
+        return true;
+    }
+
     public int GetNumOfRows()
     {
         return numOfRows;

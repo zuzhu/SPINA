@@ -31,6 +31,8 @@ public abstract class Visitor {
   public abstract void VisitVectorIndexElement(VectorIndexElement element);
   public abstract void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element);
   public abstract void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element);
+  public abstract void VisitVectorIndexElementNew(VectorIndexElement element);
+  public abstract void VisitParallelElement(ParallelElement element);
 
   public void VisitElement(Element element){
     if(element is IntegerElement){
@@ -82,6 +84,16 @@ public abstract class Visitor {
         // what to show here?
         VectorIndexElement vec_elem = (VectorIndexElement)element;
         VisitVectorIndexElement(vec_elem);
+    }
+    else if (element is ParallelAssignmentOperationElement)
+    {
+        ParallelAssignmentOperationElement paoe = (ParallelAssignmentOperationElement)element;
+        VisitParallelAssignmentOperationElement(paoe);
+    }
+    else if (element is ParallelAdditionOperationElement)
+    {
+        ParallelAdditionOperationElement paoe = (ParallelAdditionOperationElement)element;
+        VisitParallelAdditionOperationElement(paoe);
     }
   }
 

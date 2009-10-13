@@ -38,7 +38,7 @@ public class consoleProgram
     public void setText(String value) { line = value; }
     public void setDelegate(SampleDelegate value) { d1 = value; }
 
-    public void setVisitorDelegate(SampleDelegate value) { interp_visitor.setDelegate(value); }
+    public void setVisitorDelegate(SampleDelegate value) { interp_visitor.setDelegate(value); print_visitor.setDelegate(value); }
 
     public void VisitLine()
     {
@@ -53,7 +53,7 @@ public class consoleProgram
         //{
         //    d1(e.Message);
         //}
-        setVisitorDelegate(d1);
+            setVisitorDelegate(d1);
         //try
         //{
             InterpParser.program_return program = parser.program();

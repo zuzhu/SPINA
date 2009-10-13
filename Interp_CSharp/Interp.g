@@ -133,7 +133,7 @@ parallel_for returns [ParallelForOperationElement ret]
 @init {
   retval.ret = new ParallelForOperationElement();
 }
-  : 'parallel-for' '(' variable ASSIGNMENT low=int_literal '..' high=int_literal ')' '{' (parallelassignment {retval.ret.addExpression($parallelassignment.ret); } )* '}'
+  : 'parallel-for' '(' variable ASSIGNMENT low=int_literal '..' high=int_literal ')' '{' (parallelassignment {retval.ret.addExpression($parallelassignment.ret); } )* '}' SEMI
   { retval.ret.setChildElement($variable.ret); retval.ret.setLowRange($low.ret); retval.ret.setHighRange($high.ret); }
   ;
 

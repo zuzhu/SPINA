@@ -9,11 +9,14 @@
 // language: Java 1.6.0.0
 ////////////////////////////////////////////////////////////////////////
 
-public class ParallelAdditionOperationElement : Element
+public class ParallelAdditionOperationElement : ParallelElement
 {
 
     Element mLhs;
     Element mRhs;
+    //VariableElement mVar;
+    //int value;
+    //bool isVarSet = false;
 
     public override void Accept(Visitor visitor)
     {
@@ -25,4 +28,11 @@ public class ParallelAdditionOperationElement : Element
 
     public Element getRhs() { return mRhs; }
     public void setRhs(Element rhs) { mRhs = rhs; }
+
+    //public int getValue() { return value; }
+    //public void setValue(int value) { this.value = value; }
+
+    //public VariableElement getVariable() { return mVar; }
+    //public void setVariable(VariableElement var) { mVar = var; isVarSet = true; }
+    //public bool getVarSetFlag() { return isVarSet; }
 }

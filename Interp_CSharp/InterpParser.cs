@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-11 20:17:07
+// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-12 23:12:39
 
 
 using System.Collections.Generic;
@@ -1373,7 +1373,7 @@ public class InterpParser : Parser
     };
 
     // $ANTLR start "parallel_for"
-    // Interp.g:132:1: parallel_for returns [ParallelForOperationElement ret] : 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}' ;
+    // Interp.g:132:1: parallel_for returns [ParallelForOperationElement ret] : 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}' SEMI ;
     public InterpParser.parallel_for_return parallel_for() // throws RecognitionException [1]
     {   
         InterpParser.parallel_for_return retval = new InterpParser.parallel_for_return();
@@ -1388,6 +1388,7 @@ public class InterpParser : Parser
         IToken char_literal33 = null;
         IToken char_literal34 = null;
         IToken char_literal36 = null;
+        IToken SEMI37 = null;
         InterpParser.int_literal_return low = null;
 
         InterpParser.int_literal_return high = null;
@@ -1404,14 +1405,15 @@ public class InterpParser : Parser
         object char_literal33_tree=null;
         object char_literal34_tree=null;
         object char_literal36_tree=null;
+        object SEMI37_tree=null;
 
 
           retval.ret = new ParallelForOperationElement();
 
         try 
     	{
-            // Interp.g:136:3: ( 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}' )
-            // Interp.g:136:5: 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}'
+            // Interp.g:136:3: ( 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}' SEMI )
+            // Interp.g:136:5: 'parallel-for' '(' variable ASSIGNMENT low= int_literal '..' high= int_literal ')' '{' ( parallelassignment )* '}' SEMI
             {
             	root_0 = (object)adaptor.GetNilNode();
 
@@ -1493,6 +1495,10 @@ public class InterpParser : Parser
             		char_literal36_tree = (object)adaptor.Create(char_literal36);
             		adaptor.AddChild(root_0, char_literal36_tree);
 
+            	SEMI37=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_parallel_for607); 
+            		SEMI37_tree = (object)adaptor.Create(SEMI37);
+            		adaptor.AddChild(root_0, SEMI37_tree);
+
             	 retval.ret.setChildElement(((variable30 != null) ? variable30.ret : null)); retval.ret.setLowRange(((low != null) ? low.ret : null)); retval.ret.setHighRange(((high != null) ? high.ret : null)); 
 
             }
@@ -1537,17 +1543,17 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken ASSIGNMENT38 = null;
-        IToken SEMI41 = null;
-        InterpParser.vectorindex_return vectorindex37 = null;
+        IToken ASSIGNMENT39 = null;
+        IToken SEMI42 = null;
+        InterpParser.vectorindex_return vectorindex38 = null;
 
-        InterpParser.var_or_int_literal_return var_or_int_literal39 = null;
+        InterpParser.var_or_int_literal_return var_or_int_literal40 = null;
 
-        InterpParser.paralleladdition_return paralleladdition40 = null;
+        InterpParser.paralleladdition_return paralleladdition41 = null;
 
 
-        object ASSIGNMENT38_tree=null;
-        object SEMI41_tree=null;
+        object ASSIGNMENT39_tree=null;
+        object SEMI42_tree=null;
 
 
           retval.ret = new ParallelAssignmentOperationElement();
@@ -1559,15 +1565,15 @@ public class InterpParser : Parser
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_vectorindex_in_parallelassignment631);
-            	vectorindex37 = vectorindex();
+            	PushFollow(FOLLOW_vectorindex_in_parallelassignment633);
+            	vectorindex38 = vectorindex();
             	state.followingStackPointer--;
 
-            	adaptor.AddChild(root_0, vectorindex37.Tree);
-            	retval.ret.setLhs(((vectorindex37 != null) ? vectorindex37.ret : null)); 
-            	ASSIGNMENT38=(IToken)Match(input,ASSIGNMENT,FOLLOW_ASSIGNMENT_in_parallelassignment639); 
-            		ASSIGNMENT38_tree = (object)adaptor.Create(ASSIGNMENT38);
-            		adaptor.AddChild(root_0, ASSIGNMENT38_tree);
+            	adaptor.AddChild(root_0, vectorindex38.Tree);
+            	retval.ret.setLhs(((vectorindex38 != null) ? vectorindex38.ret : null)); 
+            	ASSIGNMENT39=(IToken)Match(input,ASSIGNMENT,FOLLOW_ASSIGNMENT_in_parallelassignment641); 
+            		ASSIGNMENT39_tree = (object)adaptor.Create(ASSIGNMENT39);
+            		adaptor.AddChild(root_0, ASSIGNMENT39_tree);
 
             	// Interp.g:146:5: ( var_or_int_literal | paralleladdition )
             	int alt8 = 2;
@@ -1597,13 +1603,13 @@ public class InterpParser : Parser
             	{
             	    int LA8_2 = input.LA(2);
 
-            	    if ( (LA8_2 == SEMI) )
-            	    {
-            	        alt8 = 1;
-            	    }
-            	    else if ( (LA8_2 == PLUS) )
+            	    if ( (LA8_2 == PLUS) )
             	    {
             	        alt8 = 2;
+            	    }
+            	    else if ( (LA8_2 == SEMI) )
+            	    {
+            	        alt8 = 1;
             	    }
             	    else 
             	    {
@@ -1625,33 +1631,33 @@ public class InterpParser : Parser
             	    case 1 :
             	        // Interp.g:146:6: var_or_int_literal
             	        {
-            	        	PushFollow(FOLLOW_var_or_int_literal_in_parallelassignment647);
-            	        	var_or_int_literal39 = var_or_int_literal();
+            	        	PushFollow(FOLLOW_var_or_int_literal_in_parallelassignment649);
+            	        	var_or_int_literal40 = var_or_int_literal();
             	        	state.followingStackPointer--;
 
-            	        	adaptor.AddChild(root_0, var_or_int_literal39.Tree);
-            	        	retval.ret.setRhs(((var_or_int_literal39 != null) ? var_or_int_literal39.ret : null)); 
+            	        	adaptor.AddChild(root_0, var_or_int_literal40.Tree);
+            	        	retval.ret.setRhs(((var_or_int_literal40 != null) ? var_or_int_literal40.ret : null)); 
 
             	        }
             	        break;
             	    case 2 :
             	        // Interp.g:147:7: paralleladdition
             	        {
-            	        	PushFollow(FOLLOW_paralleladdition_in_parallelassignment658);
-            	        	paralleladdition40 = paralleladdition();
+            	        	PushFollow(FOLLOW_paralleladdition_in_parallelassignment660);
+            	        	paralleladdition41 = paralleladdition();
             	        	state.followingStackPointer--;
 
-            	        	adaptor.AddChild(root_0, paralleladdition40.Tree);
-            	        	retval.ret.setRhs(((paralleladdition40 != null) ? paralleladdition40.ret : null)); 
+            	        	adaptor.AddChild(root_0, paralleladdition41.Tree);
+            	        	retval.ret.setRhs(((paralleladdition41 != null) ? paralleladdition41.ret : null)); 
 
             	        }
             	        break;
 
             	}
 
-            	SEMI41=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_parallelassignment668); 
-            		SEMI41_tree = (object)adaptor.Create(SEMI41);
-            		adaptor.AddChild(root_0, SEMI41_tree);
+            	SEMI42=(IToken)Match(input,SEMI,FOLLOW_SEMI_in_parallelassignment670); 
+            		SEMI42_tree = (object)adaptor.Create(SEMI42);
+            		adaptor.AddChild(root_0, SEMI42_tree);
 
 
             }
@@ -1696,9 +1702,9 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken char_literal42 = null;
         IToken char_literal43 = null;
         IToken char_literal44 = null;
+        IToken char_literal45 = null;
         InterpParser.vectorindex_return el1 = null;
 
         InterpParser.vectorindex_return el2 = null;
@@ -1712,9 +1718,9 @@ public class InterpParser : Parser
         InterpParser.vectorindex_return el6 = null;
 
 
-        object char_literal42_tree=null;
         object char_literal43_tree=null;
         object char_literal44_tree=null;
+        object char_literal45_tree=null;
 
 
           retval.ret = new ParallelAdditionOperationElement();
@@ -1731,17 +1737,17 @@ public class InterpParser : Parser
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition689);
+                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition691);
                     	el1 = vectorindex();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, el1.Tree);
                     	 retval.ret.setLhs(((el1 != null) ? el1.ret : null)); 
-                    	char_literal42=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition698); 
-                    		char_literal42_tree = (object)adaptor.Create(char_literal42);
-                    		adaptor.AddChild(root_0, char_literal42_tree);
+                    	char_literal43=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition700); 
+                    		char_literal43_tree = (object)adaptor.Create(char_literal43);
+                    		adaptor.AddChild(root_0, char_literal43_tree);
 
-                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition707);
+                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition709);
                     	el2 = vectorindex();
                     	state.followingStackPointer--;
 
@@ -1755,17 +1761,17 @@ public class InterpParser : Parser
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition724);
+                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition726);
                     	el3 = vectorindex();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, el3.Tree);
                     	 retval.ret.setLhs(((el3 != null) ? el3.ret : null)); 
-                    	char_literal43=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition732); 
-                    		char_literal43_tree = (object)adaptor.Create(char_literal43);
-                    		adaptor.AddChild(root_0, char_literal43_tree);
+                    	char_literal44=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition734); 
+                    		char_literal44_tree = (object)adaptor.Create(char_literal44);
+                    		adaptor.AddChild(root_0, char_literal44_tree);
 
-                    	PushFollow(FOLLOW_var_or_int_literal_in_paralleladdition740);
+                    	PushFollow(FOLLOW_var_or_int_literal_in_paralleladdition742);
                     	el4 = var_or_int_literal();
                     	state.followingStackPointer--;
 
@@ -1779,17 +1785,17 @@ public class InterpParser : Parser
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_var_or_int_literal_in_paralleladdition757);
+                    	PushFollow(FOLLOW_var_or_int_literal_in_paralleladdition759);
                     	el5 = var_or_int_literal();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, el5.Tree);
                     	 retval.ret.setLhs(((el5 != null) ? el5.ret : null)); 
-                    	char_literal44=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition765); 
-                    		char_literal44_tree = (object)adaptor.Create(char_literal44);
-                    		adaptor.AddChild(root_0, char_literal44_tree);
+                    	char_literal45=(IToken)Match(input,PLUS,FOLLOW_PLUS_in_paralleladdition767); 
+                    		char_literal45_tree = (object)adaptor.Create(char_literal45);
+                    		adaptor.AddChild(root_0, char_literal45_tree);
 
-                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition773);
+                    	PushFollow(FOLLOW_vectorindex_in_paralleladdition775);
                     	el6 = vectorindex();
                     	state.followingStackPointer--;
 
@@ -1840,29 +1846,29 @@ public class InterpParser : Parser
 
         object root_0 = null;
 
-        IToken char_literal46 = null;
-        IToken char_literal48 = null;
-        IToken char_literal50 = null;
+        IToken char_literal47 = null;
+        IToken char_literal49 = null;
         IToken char_literal51 = null;
         IToken char_literal52 = null;
         IToken char_literal53 = null;
+        IToken char_literal54 = null;
         InterpParser.var_or_int_literal_return v1 = null;
 
         InterpParser.var_or_int_literal_return v2 = null;
 
-        InterpParser.variable_return variable45 = null;
+        InterpParser.variable_return variable46 = null;
 
-        InterpParser.var_or_int_literal_return var_or_int_literal47 = null;
+        InterpParser.var_or_int_literal_return var_or_int_literal48 = null;
 
-        InterpParser.variable_return variable49 = null;
+        InterpParser.variable_return variable50 = null;
 
 
-        object char_literal46_tree=null;
-        object char_literal48_tree=null;
-        object char_literal50_tree=null;
+        object char_literal47_tree=null;
+        object char_literal49_tree=null;
         object char_literal51_tree=null;
         object char_literal52_tree=null;
         object char_literal53_tree=null;
+        object char_literal54_tree=null;
 
 
           retval.ret = new VectorIndexElement();
@@ -1975,25 +1981,25 @@ public class InterpParser : Parser
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_variable_in_vectorindex799);
-                    	variable45 = variable();
+                    	PushFollow(FOLLOW_variable_in_vectorindex801);
+                    	variable46 = variable();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, variable45.Tree);
-                    	char_literal46=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex801); 
-                    		char_literal46_tree = (object)adaptor.Create(char_literal46);
-                    		adaptor.AddChild(root_0, char_literal46_tree);
+                    	adaptor.AddChild(root_0, variable46.Tree);
+                    	char_literal47=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex803); 
+                    		char_literal47_tree = (object)adaptor.Create(char_literal47);
+                    		adaptor.AddChild(root_0, char_literal47_tree);
 
-                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex803);
-                    	var_or_int_literal47 = var_or_int_literal();
+                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex805);
+                    	var_or_int_literal48 = var_or_int_literal();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, var_or_int_literal47.Tree);
-                    	char_literal48=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex805); 
-                    		char_literal48_tree = (object)adaptor.Create(char_literal48);
-                    		adaptor.AddChild(root_0, char_literal48_tree);
+                    	adaptor.AddChild(root_0, var_or_int_literal48.Tree);
+                    	char_literal49=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex807); 
+                    		char_literal49_tree = (object)adaptor.Create(char_literal49);
+                    		adaptor.AddChild(root_0, char_literal49_tree);
 
-                    	 retval.ret.setVariableElement(((variable45 != null) ? variable45.ret : null)); retval.ret.setFirstIndexElement(((var_or_int_literal47 != null) ? var_or_int_literal47.ret : null)); 
+                    	 retval.ret.setVariableElement(((variable46 != null) ? variable46.ret : null)); retval.ret.setFirstIndexElement(((var_or_int_literal48 != null) ? var_or_int_literal48.ret : null)); 
 
                     }
                     break;
@@ -2002,38 +2008,38 @@ public class InterpParser : Parser
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_variable_in_vectorindex813);
-                    	variable49 = variable();
+                    	PushFollow(FOLLOW_variable_in_vectorindex815);
+                    	variable50 = variable();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, variable49.Tree);
-                    	char_literal50=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex815); 
-                    		char_literal50_tree = (object)adaptor.Create(char_literal50);
-                    		adaptor.AddChild(root_0, char_literal50_tree);
+                    	adaptor.AddChild(root_0, variable50.Tree);
+                    	char_literal51=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex817); 
+                    		char_literal51_tree = (object)adaptor.Create(char_literal51);
+                    		adaptor.AddChild(root_0, char_literal51_tree);
 
-                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex819);
+                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex821);
                     	v1 = var_or_int_literal();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, v1.Tree);
-                    	char_literal51=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex821); 
-                    		char_literal51_tree = (object)adaptor.Create(char_literal51);
-                    		adaptor.AddChild(root_0, char_literal51_tree);
-
-                    	char_literal52=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex823); 
+                    	char_literal52=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex823); 
                     		char_literal52_tree = (object)adaptor.Create(char_literal52);
                     		adaptor.AddChild(root_0, char_literal52_tree);
 
-                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex827);
+                    	char_literal53=(IToken)Match(input,LBRACK,FOLLOW_LBRACK_in_vectorindex825); 
+                    		char_literal53_tree = (object)adaptor.Create(char_literal53);
+                    		adaptor.AddChild(root_0, char_literal53_tree);
+
+                    	PushFollow(FOLLOW_var_or_int_literal_in_vectorindex829);
                     	v2 = var_or_int_literal();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, v2.Tree);
-                    	char_literal53=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex829); 
-                    		char_literal53_tree = (object)adaptor.Create(char_literal53);
-                    		adaptor.AddChild(root_0, char_literal53_tree);
+                    	char_literal54=(IToken)Match(input,RBRACK,FOLLOW_RBRACK_in_vectorindex831); 
+                    		char_literal54_tree = (object)adaptor.Create(char_literal54);
+                    		adaptor.AddChild(root_0, char_literal54_tree);
 
-                    	 retval.ret.setVariableElement(((variable49 != null) ? variable49.ret : null)); retval.ret.setFirstIndexElement(((v1 != null) ? v1.ret : null)); retval.ret.setSecondIndexElement(((v2 != null) ? v2.ret : null)); 
+                    	 retval.ret.setVariableElement(((variable50 != null) ? variable50.ret : null)); retval.ret.setFirstIndexElement(((v1 != null) ? v1.ret : null)); retval.ret.setSecondIndexElement(((v2 != null) ? v2.ret : null)); 
 
                     }
                     break;
@@ -2181,31 +2187,32 @@ public class InterpParser : Parser
     public static readonly BitSet FOLLOW_RPAREN_in_parallel_for593 = new BitSet(new ulong[]{0x0000000000400000UL});
     public static readonly BitSet FOLLOW_22_in_parallel_for595 = new BitSet(new ulong[]{0x0000000000800040UL});
     public static readonly BitSet FOLLOW_parallelassignment_in_parallel_for598 = new BitSet(new ulong[]{0x0000000000800040UL});
-    public static readonly BitSet FOLLOW_23_in_parallel_for605 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_vectorindex_in_parallelassignment631 = new BitSet(new ulong[]{0x0000000000000010UL});
-    public static readonly BitSet FOLLOW_ASSIGNMENT_in_parallelassignment639 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_parallelassignment647 = new BitSet(new ulong[]{0x0000000000000020UL});
-    public static readonly BitSet FOLLOW_paralleladdition_in_parallelassignment658 = new BitSet(new ulong[]{0x0000000000000020UL});
-    public static readonly BitSet FOLLOW_SEMI_in_parallelassignment668 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition689 = new BitSet(new ulong[]{0x0000000000008000UL});
-    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition698 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition707 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition724 = new BitSet(new ulong[]{0x0000000000008000UL});
-    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition732 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_paralleladdition740 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_paralleladdition757 = new BitSet(new ulong[]{0x0000000000008000UL});
-    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition765 = new BitSet(new ulong[]{0x0000000000000040UL});
-    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition773 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_vectorindex799 = new BitSet(new ulong[]{0x0000000000000800UL});
-    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex801 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex803 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex805 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_vectorindex813 = new BitSet(new ulong[]{0x0000000000000800UL});
-    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex815 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex819 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex821 = new BitSet(new ulong[]{0x0000000000000800UL});
-    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex823 = new BitSet(new ulong[]{0x00000000000000C0UL});
-    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex827 = new BitSet(new ulong[]{0x0000000000001000UL});
-    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex829 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_23_in_parallel_for605 = new BitSet(new ulong[]{0x0000000000000020UL});
+    public static readonly BitSet FOLLOW_SEMI_in_parallel_for607 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_vectorindex_in_parallelassignment633 = new BitSet(new ulong[]{0x0000000000000010UL});
+    public static readonly BitSet FOLLOW_ASSIGNMENT_in_parallelassignment641 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_parallelassignment649 = new BitSet(new ulong[]{0x0000000000000020UL});
+    public static readonly BitSet FOLLOW_paralleladdition_in_parallelassignment660 = new BitSet(new ulong[]{0x0000000000000020UL});
+    public static readonly BitSet FOLLOW_SEMI_in_parallelassignment670 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition691 = new BitSet(new ulong[]{0x0000000000008000UL});
+    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition700 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition709 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition726 = new BitSet(new ulong[]{0x0000000000008000UL});
+    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition734 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_paralleladdition742 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_paralleladdition759 = new BitSet(new ulong[]{0x0000000000008000UL});
+    public static readonly BitSet FOLLOW_PLUS_in_paralleladdition767 = new BitSet(new ulong[]{0x0000000000000040UL});
+    public static readonly BitSet FOLLOW_vectorindex_in_paralleladdition775 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_vectorindex801 = new BitSet(new ulong[]{0x0000000000000800UL});
+    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex803 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex805 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex807 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_vectorindex815 = new BitSet(new ulong[]{0x0000000000000800UL});
+    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex817 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex821 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex823 = new BitSet(new ulong[]{0x0000000000000800UL});
+    public static readonly BitSet FOLLOW_LBRACK_in_vectorindex825 = new BitSet(new ulong[]{0x00000000000000C0UL});
+    public static readonly BitSet FOLLOW_var_or_int_literal_in_vectorindex829 = new BitSet(new ulong[]{0x0000000000001000UL});
+    public static readonly BitSet FOLLOW_RBRACK_in_vectorindex831 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 }
