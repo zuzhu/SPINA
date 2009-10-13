@@ -1,7 +1,12 @@
 ////////////////////////////////////////////////////////////////////////
-// AdditionOperationElement.java: holds the data needed for an addition 
+// AdditionOperationElement.cs: holds the data needed for an addition 
 //  operation.
 // 
+// version: 1.1
+// description: part of the interpreter example for the visitor design
+//  pattern.
+// author: Zutao Zhu (zuzhu@syr.edu)
+//
 // version: 1.0
 // description: part of the interpreter example for the visitor design
 //  pattern.

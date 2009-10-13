@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-12 23:12:39
+// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-13 00:30:45
 
 
 using System.Collections.Generic;
@@ -180,8 +180,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = LPAREN;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:180:8: ( '(' )
-            // Interp.g:180:10: '('
+            // Interp.g:199:8: ( '(' )
+            // Interp.g:199:10: '('
             {
             	Match('('); 
 
@@ -203,8 +203,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = RPAREN;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:181:8: ( ')' )
-            // Interp.g:181:10: ')'
+            // Interp.g:200:8: ( ')' )
+            // Interp.g:200:10: ')'
             {
             	Match(')'); 
 
@@ -226,8 +226,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = COMMA;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:182:7: ( ',' )
-            // Interp.g:182:9: ','
+            // Interp.g:201:7: ( ',' )
+            // Interp.g:201:9: ','
             {
             	Match(','); 
 
@@ -249,8 +249,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = LBRACK;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:183:8: ( '[' )
-            // Interp.g:183:10: '['
+            // Interp.g:202:8: ( '[' )
+            // Interp.g:202:10: '['
             {
             	Match('['); 
 
@@ -272,8 +272,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = RBRACK;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:184:8: ( ']' )
-            // Interp.g:184:10: ']'
+            // Interp.g:203:8: ( ']' )
+            // Interp.g:203:10: ']'
             {
             	Match(']'); 
 
@@ -295,8 +295,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = SEMI;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:185:6: ( ';' )
-            // Interp.g:185:8: ';'
+            // Interp.g:204:6: ( ';' )
+            // Interp.g:204:8: ';'
             {
             	Match(';'); 
 
@@ -318,8 +318,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = DOT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:186:5: ( '.' )
-            // Interp.g:186:7: '.'
+            // Interp.g:205:5: ( '.' )
+            // Interp.g:205:7: '.'
             {
             	Match('.'); 
 
@@ -341,8 +341,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = SEP;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:187:5: ( '|' )
-            // Interp.g:187:7: '|'
+            // Interp.g:206:5: ( '|' )
+            // Interp.g:206:7: '|'
             {
             	Match('|'); 
 
@@ -364,8 +364,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = PLUS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:189:5: ( '+' )
-            // Interp.g:189:7: '+'
+            // Interp.g:208:5: ( '+' )
+            // Interp.g:208:7: '+'
             {
             	Match('+'); 
 
@@ -387,8 +387,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = MINUS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:190:7: ( '-' )
-            // Interp.g:190:9: '-'
+            // Interp.g:209:7: ( '-' )
+            // Interp.g:209:9: '-'
             {
             	Match('-'); 
 
@@ -410,8 +410,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = MUL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:191:5: ( '*' )
-            // Interp.g:191:7: '*'
+            // Interp.g:210:5: ( '*' )
+            // Interp.g:210:7: '*'
             {
             	Match('*'); 
 
@@ -433,8 +433,8 @@ public class InterpLexer : Lexer {
     		{
             int _type = ASSIGNMENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:193:11: ( '=' )
-            // Interp.g:193:13: '='
+            // Interp.g:212:11: ( '=' )
+            // Interp.g:212:13: '='
             {
             	Match('='); 
 
@@ -456,10 +456,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = VARIABLE;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:194:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // Interp.g:194:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // Interp.g:213:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // Interp.g:213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            	// Interp.g:194:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            	// Interp.g:213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             	int cnt1 = 0;
             	do 
             	{
@@ -523,10 +523,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = INT_LITERAL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:195:12: ( ( '0' .. '9' )+ )
-            // Interp.g:195:14: ( '0' .. '9' )+
+            // Interp.g:214:12: ( ( '0' .. '9' )+ )
+            // Interp.g:214:14: ( '0' .. '9' )+
             {
-            	// Interp.g:195:14: ( '0' .. '9' )+
+            	// Interp.g:214:14: ( '0' .. '9' )+
             	int cnt2 = 0;
             	do 
             	{
@@ -542,7 +542,7 @@ public class InterpLexer : Lexer {
             	    switch (alt2) 
             		{
             			case 1 :
-            			    // Interp.g:195:15: '0' .. '9'
+            			    // Interp.g:214:15: '0' .. '9'
             			    {
             			    	MatchRange('0','9'); 
 
@@ -580,10 +580,10 @@ public class InterpLexer : Lexer {
     		{
             int _type = WHITESPACE;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Interp.g:196:12: ( ( ' ' | '\\t' | '\\n' | '\\r' )+ )
-            // Interp.g:196:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
+            // Interp.g:215:12: ( ( ' ' | '\\t' | '\\n' | '\\r' )+ )
+            // Interp.g:215:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
             {
-            	// Interp.g:196:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
+            	// Interp.g:215:14: ( ' ' | '\\t' | '\\n' | '\\r' )+
             	int cnt3 = 0;
             	do 
             	{

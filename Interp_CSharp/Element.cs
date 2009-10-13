@@ -2,8 +2,7 @@
 // Element.cs: declares the Accept function that takes a visitor 
 // 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// description: derived from phil's Element.cs
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 // 

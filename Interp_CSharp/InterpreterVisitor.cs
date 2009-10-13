@@ -2,9 +2,14 @@
 // InterpreterVisitor.cs: Implements a vistor that interprets the 
 //  syntax tree.
 // 
+// version: 1.2
+// description: add new visit-functions
+// author: Zutao Zhu (zuzhu@syr.edu)
+// language: C# .Net 3.5
+// 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// description: add "Hashtable mIntVariableMap;" and "Stack<MatrixElement> mStack;"
+//   to support the matrix computation
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 // 
@@ -29,6 +34,8 @@ public class InterpreterVisitor : Visitor {
   Queue<int> mQueue;
   SampleDelegate d1;
 
+  //----< constructor >------------------------------
+
   public InterpreterVisitor(){
     mVariableMap = new Hashtable();
     mIntVariableMap = new Hashtable();
@@ -38,7 +45,11 @@ public class InterpreterVisitor : Visitor {
     mQueue = new Queue<int>();
   }
 
+  //----< set a delegate >------------------------------
+
   public void setDelegate(SampleDelegate value) { d1 = value; }
+
+  //----< visit Variable >------------------------------
 
   public override void VisitVariableElement(VariableElement element){
     if(mVariableMap.ContainsKey(element.getText())){
@@ -58,11 +69,16 @@ public class InterpreterVisitor : Visitor {
         }
     }
   }
+
+  //----< visit Integer >------------------------------
+
   public override void VisitIntegerElement(IntegerElement element){
     int element_value = int.Parse(element.getText());
-    //mQueue.Enqueue(element_value);
     mIntStack.Push(element);
   }
+
+  //----< visit Assignment Operation >------------------------------
+
   public override void VisitAssignmentOperationElement(AssignmentOperationElement element){
     String variable_name = element.getLhs().getText();
 
@@ -91,17 +107,24 @@ public class InterpreterVisitor : Visitor {
             MatrixElement result = mStack.Pop();
             mVariableMap[variable_name] = result;
         }
+        if (maoe.getLhs() is VariableElement)
+        {
+            MatrixElement result = mStack.Pop();
+            mVariableMap[variable_name] = result;
+        }
     }
     if (rhs is MatrixMultiplicationOperationElement)
     {
         MatrixMultiplicationOperationElement mmoe = (MatrixMultiplicationOperationElement)rhs;
-        //if (mmoe.getLhs() is MatrixElement)
         {
             MatrixElement result = mStack.Pop();
             mVariableMap[variable_name] = result;
         }
     }
   }
+
+  //----< visit Addition Operation >------------------------------
+
   public override void VisitAdditionOperationElement(AdditionOperationElement element)
   {
       VisitElement(element.getLhs());
@@ -112,30 +135,21 @@ public class InterpreterVisitor : Visitor {
       result.setText((lhs + rhs).ToString());
       mIntStack.Push(result);
   }
+
+  //----< visit Matrix Addition Operation >------------------------------
+
   public override void VisitMatrixAdditionOperationElement(MatrixAdditionOperationElement element){
     VisitElement(element.getLhs());
     VisitElement(element.getRhs());
-    if (element.getLhs() is MatrixElement)
-    {
-        MatrixElement rhs = mStack.Pop();
-        MatrixElement lhs = mStack.Pop();
-        MatrixElement result = new MatrixElement();
-        bool ret = lhs.Addition(lhs, rhs, ref result);
-        mStack.Push(result);
-    }
-    if (element.getLhs() is IntegerElement)
-    {
-        IntegerElement rhs = mIntStack.Pop();
-        IntegerElement lhs = mIntStack.Pop();
-        IntegerElement result = new IntegerElement();
-        result.setText((int.Parse(lhs.getText()) + int.Parse(rhs.getText())).ToString());
-        mIntStack.Push(result);
-    }
-    if (element.getLhs() is VariableElement)
-    {
-
-    }
+    MatrixElement rhs = mStack.Pop();
+    MatrixElement lhs = mStack.Pop();
+    MatrixElement result = new MatrixElement();
+    bool ret = lhs.Addition(lhs, rhs, ref result);
+    mStack.Push(result);
   }
+
+  //----< visit Matrix Multiplication Operation >------------------------------
+
   public override void VisitMatrixMultiplicationOperationElement(MatrixMultiplicationOperationElement element)
   {
       VisitElement(element.getLhs());
@@ -147,6 +161,8 @@ public class InterpreterVisitor : Visitor {
       mStack.Push(result);
   }
 
+  //----< Helpper function for print a matrix >------------------------------
+    
   private void PrintRow(List<RowElement> rows, int index)
   {
       RowElement r = rows[index];
@@ -166,10 +182,11 @@ public class InterpreterVisitor : Visitor {
       }
   }
 
+  //----< visit Print Operation >------------------------------
+
   public override void VisitPrintOperationElement(PrintOperationElement element){
     VisitElement(element.getChildElement());
     VariableElement var = element.getChildElement() as VariableElement;
-    //MatrixElement result = new MatrixElement();
     if (mVariableMap.ContainsKey(var.getText()))
     {
         MatrixElement result = mStack.Pop();
@@ -181,7 +198,6 @@ public class InterpreterVisitor : Visitor {
         }
         else
         {
-
             if (numOfRows == 1)
             {
                 Console.Write("[");
@@ -214,11 +230,9 @@ public class InterpreterVisitor : Visitor {
         Console.WriteLine(int.Parse(result.getText()));
         d1(int.Parse(result.getText()).ToString());
     }
-    //MatrixElement result = mStack.Pop();
-    //Console.WriteLine(result.ToString());
-
-    
   }
+
+  //----< visit a Vector (Row) Operation >------------------------------
 
   public override void VisitRowElement(RowElement element)
   {
@@ -233,6 +247,7 @@ public class InterpreterVisitor : Visitor {
       d1("\n");
   }
 
+  //----< visit a Matrix Element >------------------------------
   public override void VisitMatrixElement(MatrixElement element)
   {
       //Console.WriteLine("VisitMatrixElement");
@@ -240,10 +255,13 @@ public class InterpreterVisitor : Visitor {
       mStack.Push(element);
   }
 
+  //----< visit a Parallel Element >------------------------------
   public override void VisitParallelElement(ParallelElement element)
   {
       Console.WriteLine("VisitParallelElement");
   }
+
+  //----< visit a Parallel For Operation >------------------------------
 
   public override void VisitParallelForOperationElement(ParallelForOperationElement element)
   {
@@ -251,6 +269,8 @@ public class InterpreterVisitor : Visitor {
       //d1("VisitParallelFor");
       element.Beta();
   }
+
+  //----< set the value of an index >------------------------------
 
   private bool setIndexValue(VariableElement var, VariableElement indexVar, int givenValue, ref int value)
   {
@@ -265,73 +285,57 @@ public class InterpreterVisitor : Visitor {
       return true;
   }
 
-  public override void VisitVectorIndexElement(VectorIndexElement element)
+  //----< evaluate the index of a VectorIndexElement >------------------------------
+
+  private int setVectorIndexValue(VectorIndexElement element, Element var_elem)
   {
       int first_index_num = 0;
-      int second_index_num = 0;
-      Element first_index = element.getFirstIndexElement();
-      Element second_index = element.getSecondIndexElement();
-      if (first_index is VariableElement)
+      if (var_elem is VariableElement)
       {
-          VariableElement var = (VariableElement)first_index;
+          VariableElement var = (VariableElement)var_elem;
           bool bRet = setIndexValue(var, element.getVariable(), element.getValue(), ref first_index_num);
       }
       else
       {
-          if (first_index is IntegerElement)
+          if (var_elem is IntegerElement)
           {
-              IntegerElement int_elem = (IntegerElement)first_index;
+              IntegerElement int_elem = (IntegerElement)var_elem;
               first_index_num = int.Parse(int_elem.getText());
           }
       }
+      return first_index_num;
+  }
 
-      if (second_index is VariableElement)
-      {
-          VariableElement var = (VariableElement)second_index;
-          bool bRet = setIndexValue(var, element.getVariable(), element.getValue(), ref second_index_num);
-      }
-      else
-      {
-          if (second_index is IntegerElement)
-          {
-              IntegerElement int_elem = (IntegerElement)second_index;
-              second_index_num = int.Parse(int_elem.getText());
-          }
-      }
+  //----< visit VectorIndexElement >------------------------------
 
-      VariableElement paoeLhs_var = element.getVariableElement() as VariableElement;
-      VectorIndexElement new_vie = new VectorIndexElement();
-      new_vie.setVariableElement(paoeLhs_var);
-      IntegerElement new_first = new IntegerElement();
-      new_first.setText(first_index_num.ToString());
-      IntegerElement new_second = new IntegerElement();
-      new_second.setText(second_index_num.ToString());
-      new_vie.setFirstIndexElement(new_first);
-      new_vie.setSecondIndexElement(new_second);
+  public override void VisitVectorIndexElement(VectorIndexElement element)
+  {
+      Element first_index = element.getFirstIndexElement();
+      Element second_index = element.getSecondIndexElement();
+      int first_index_num = setVectorIndexValue(element, first_index);
+      int second_index_num = setVectorIndexValue(element, second_index);
 
-      VariableElement matrix_var = (new_vie.getVariableElement()) as VariableElement;
-      IntegerElement first = (new_vie.getFirstIndexElement()) as IntegerElement;
-      IntegerElement second = (new_vie.getSecondIndexElement()) as IntegerElement;
-      Console.WriteLine("VisitVectorIndex " + matrix_var.getText() + " " + first.getText() + " " + second.getText());
-      //d1("VisitVectorIndex " + matrix_var.getText() + " " + first.getText() + " " + second.getText());
+      VariableElement matrix_var = element.getVariableElement() as VariableElement;
 
       if (mVariableMap.ContainsKey(matrix_var.getText()))
       {
           MatrixElement element_value = (MatrixElement)mVariableMap[matrix_var.getText()];
           List<RowElement> rows = element_value.getRows();
-          RowElement row = rows[int.Parse(first.getText())];
+          RowElement row = rows[first_index_num];
 
           IntegerElement new_int = new IntegerElement();
-          new_int.setText(row.getElement(int.Parse(second.getText())).ToString());
+          new_int.setText(row.getElement(second_index_num).ToString());
           mIntStack.Push(new_int);
-          Console.WriteLine(" element " + row.getElement(int.Parse(second.getText())).ToString());
       }
-
   }
+
+  //----< visit VectorIndexElement New >------------------------------
 
   public override void VisitVectorIndexElementNew(VectorIndexElement element)
   {
   }
+
+  //----< visit Parallel Addition Operation >------------------------------
 
   public override void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element)
   {
@@ -365,9 +369,6 @@ public class InterpreterVisitor : Visitor {
 
   public override void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element)
   {
-      Console.WriteLine("VisitParallelAssignment");
-      //d1("VisitParallelAssignment");
-
       Element rhs = element.getRhs();
       ParallelElement pe_rhs = (ParallelElement)element.getRhs();
       if (element.getRhs() is ParallelElement)
@@ -379,14 +380,6 @@ public class InterpreterVisitor : Visitor {
       IntegerElement result = mIntStack.Pop();
       int result_int = int.Parse(result.getText());
 
-      //VectorIndexElement vie = element.getLhs();
-      //VariableElement vie_var = (vie.getVariableElement()) as VariableElement;
-      //string s = vie_var.getText();
-      //IntegerElement first_index = (vie.getFirstIndexElement()) as IntegerElement;
-      //IntegerElement second_index = (vie.getSecondIndexElement()) as IntegerElement;
-      //int row = int.Parse(first_index.getText());
-      //int col = int.Parse(second_index.getText());
-
       // the lhs of ParallelForAssignment
       VectorIndexElement vie = (VectorIndexElement)element.getLhs();
       ParallelElement pe_lhs = (ParallelElement)element.getLhs();
@@ -397,53 +390,55 @@ public class InterpreterVisitor : Visitor {
       }
       VariableElement vie_var = (vie.getVariableElement()) as VariableElement;
       string s = vie_var.getText();
-      int result_first_index_num = 0;
-      int result_second_index_num = 0;
+      //int result_first_index_num = 0;
+      //int result_second_index_num = 0;
       Element result_first_index = vie.getFirstIndexElement();
       Element result_second_index = vie.getSecondIndexElement();
-      if (result_first_index is VariableElement)
-      {
-          VariableElement var = (VariableElement)result_first_index;
-          VariableElement iteration_var = (VariableElement)(vie.getVariable());
-          if (var.getText() != iteration_var.getText())
-          {
-              //d1("incorrect index");
-          }
-          else
-          {
-              result_first_index_num = vie.getValue();
-          }
-      }
-      else
-      {
-          if (result_first_index is IntegerElement)
-          {
-              IntegerElement int_elem = (IntegerElement)result_first_index;
-              result_first_index_num = int.Parse(int_elem.getText());
-          }
-      }
+      int result_first_index_num = setVectorIndexValue(vie, result_first_index);
+      //if (result_first_index is VariableElement)
+      //{
+      //    VariableElement var = (VariableElement)result_first_index;
+      //    VariableElement iteration_var = (VariableElement)(vie.getVariable());
+      //    if (var.getText() != iteration_var.getText())
+      //    {
+      //        //d1("incorrect index");
+      //    }
+      //    else
+      //    {
+      //        result_first_index_num = vie.getValue();
+      //    }
+      //}
+      //else
+      //{
+      //    if (result_first_index is IntegerElement)
+      //    {
+      //        IntegerElement int_elem = (IntegerElement)result_first_index;
+      //        result_first_index_num = int.Parse(int_elem.getText());
+      //    }
+      //}
 
-      if (result_second_index is VariableElement)
-      {
-          VariableElement var = (VariableElement)result_second_index;
-          VariableElement childElement = (VariableElement)(vie.getVariable());
-          if (var.getText() != childElement.getText())
-          {
-              //d1("incorrect index");
-          }
-          else
-          {
-              result_second_index_num = vie.getValue();
-          }
-      }
-      else
-      {
-          if (result_second_index is IntegerElement)
-          {
-              IntegerElement int_elem = (IntegerElement)result_second_index;
-              result_second_index_num = int.Parse(int_elem.getText());
-          }
-      }
+      int result_second_index_num = setVectorIndexValue(vie, result_second_index);
+      //if (result_second_index is VariableElement)
+      //{
+      //    VariableElement var = (VariableElement)result_second_index;
+      //    VariableElement childElement = (VariableElement)(vie.getVariable());
+      //    if (var.getText() != childElement.getText())
+      //    {
+      //        //d1("incorrect index");
+      //    }
+      //    else
+      //    {
+      //        result_second_index_num = vie.getValue();
+      //    }
+      //}
+      //else
+      //{
+      //    if (result_second_index is IntegerElement)
+      //    {
+      //        IntegerElement int_elem = (IntegerElement)result_second_index;
+      //        result_second_index_num = int.Parse(int_elem.getText());
+      //    }
+      //}
 
       if (mVariableMap.ContainsKey(s))
       {

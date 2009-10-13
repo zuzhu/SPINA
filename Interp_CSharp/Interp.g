@@ -15,6 +15,25 @@ options {
   output=AST;
 } 
 
+@members {
+  protected void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
+  {
+    throw new MismatchedTokenException(ttype, input);
+  }
+  
+  public void RecoverFromMismatchedSet(IIntStream input,
+    RecognitionException e, BitSet follow)
+  {
+    throw e;
+  }
+}
+
+@rulecatch {
+    catch (RecognitionException e) {
+        throw e;
+    }
+}
+
 @parser::header {
 using System.Collections.Generic;
 }

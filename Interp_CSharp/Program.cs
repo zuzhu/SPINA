@@ -42,6 +42,7 @@ public class consoleProgram
 
     public void VisitLine()
     {
+        int i = 0;
         try
         {
             ANTLRStringStream string_stream = new ANTLRStringStream(line);
@@ -58,7 +59,7 @@ public class consoleProgram
         //{
             InterpParser.program_return program = parser.program();
             List<Element> elements = program.ret;
-            for (int i = 0; i < elements.Count; i++)
+            for (i = 0; i < elements.Count; i++)
             {
                 Element curr = elements[i];
                 curr.Accept(print_visitor);
@@ -69,7 +70,9 @@ public class consoleProgram
         catch (RecognitionException e)
         {
             Console.WriteLine(e.Message);
-            d1(e.Message);
+            d1("Syntax error in " + (i+1).ToString() + "-th line.\n");
+            //d1(e.Message);
+            d1("END");
         }
 
     }
@@ -82,16 +85,16 @@ public class consoleProgram
             InterpLexer lexer = new InterpLexer(string_stream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             InterpParser parser = new InterpParser(tokens);
-        //}
-        //catch (RecognitionException e)
-        //{
-        //    d1(e.Message);
-        //}
+            //}
+            //catch (RecognitionException e)
+            //{
+            //    d1(e.Message);
+            //}
 
-        setVisitorDelegate(d1);
+            setVisitorDelegate(d1);
 
-        //try
-        //{
+            //try
+            //{
             InterpParser.program_return program = parser.program();
             List<Element> elements = program.ret;
             for (int i = 0; i < elements.Count; i++)
@@ -101,12 +104,17 @@ public class consoleProgram
                 curr.Accept(interp_visitor);
             }
         }
+        catch (MismatchedTokenException e)
+        {
+            Console.WriteLine(e.Message);
+            d1(e.Message);
+        }
         catch (RecognitionException e)
         {
             Console.WriteLine(e.Message);
             d1(e.Message);
         }
-
+        
     }
 
     public void RunEvalLoop()

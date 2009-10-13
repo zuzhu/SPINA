@@ -2,7 +2,7 @@
 // IntegerElement.cs: holds the data needed to represent an Integer.
 // 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
+// description: derived from phil's code
 //  pattern.
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5

@@ -15,6 +15,27 @@ options {
   output=AST;
 } 
 
+@members {
+  protected void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
+    throws RecognitionException
+  {
+    throw new MismatchedTokenException(ttype, input);
+  }
+  
+  public void RecoverFromMismatchedSet(IIntStream input,
+    RecognitionException e, BitSet follow)
+    throws RecognitionException
+  {
+    throw e;
+  }
+}
+
+@rulecatch {
+    catch (RecognitionException e) {
+        throw e;
+    }
+}
+
 @parser::header {
 using System.Collections.Generic;
 }
@@ -133,7 +154,7 @@ parallel_for returns [ParallelForOperationElement ret]
 @init {
   retval.ret = new ParallelForOperationElement();
 }
-  : 'parallel-for' '(' variable ASSIGNMENT low=int_literal '..' high=int_literal ')' '{' (parallelassignment {retval.ret.addExpression($parallelassignment.ret); } )* '}'
+  : 'parallel-for' '(' variable ASSIGNMENT low=int_literal '..' high=int_literal ')' '{' (parallelassignment {retval.ret.addExpression($parallelassignment.ret); } )* '}' SEMI
   { retval.ret.setChildElement($variable.ret); retval.ret.setLowRange($low.ret); retval.ret.setHighRange($high.ret); }
   ;
 

@@ -1,22 +1,16 @@
 ﻿////////////////////////////////////////////////////////////////////////
-// IntegerElement.cs: holds the data needed to represent an Integer.
-// 
-// version: 1.2
-// description: Matrix Addition added
-// author: Zutao Zhu (zuzhu@syr.edu)
-// language: C# .Net 3.5
+// MatrixElement.cs: holds the data needed to represent a Matrix.
 // 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// description: Matrix Addition and Multiplication added
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 // 
 // version: 1.0
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: phil pratt-szeliga (pcpratts@syr.edu)
+// description: Basic Matrix component
+// author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
+// 
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Text;
@@ -28,16 +22,22 @@ public class MatrixElement : Element
     int numOfRows;
     List<RowElement> rows;
 
+    //----< override Accept interface from Element base class >------------------------------
+
     public override void Accept(Visitor visitor)
     {
         visitor.VisitMatrixElement(this);
     }
+
+    //----< constructor >------------------------------
 
     public MatrixElement()
     {
         numOfRows = 0;
         rows = new List<RowElement>();
     }
+
+    //----< set the value for Matrix[rowNum][colNum] >------------------------------
 
     public bool setValue(int rowNum, int colNum, int value)
     {
@@ -50,10 +50,14 @@ public class MatrixElement : Element
         return true;
     }
 
+    //----< return the number of rows >------------------------------
+
     public int GetNumOfRows()
     {
         return numOfRows;
     }
+
+    //----< return the number of cols>------------------------------
 
     public int GetNumOfCols()
     {
@@ -66,6 +70,9 @@ public class MatrixElement : Element
     public List<RowElement> getRows() { return rows; }
     public void setRows(List<RowElement> value) { rows = value; }
     public void addRows(RowElement r) { rows.Add(r); numOfRows++; }
+
+    //----< check whether one row in the matrix has the same size as the first row >------------------------------
+
     public bool isSameRowSize(RowElement r)
     {
         if (rows.Count > 0)
@@ -78,6 +85,9 @@ public class MatrixElement : Element
         }
         return true;
     }
+
+    //----< wrapper function to check the row size equivalence >------------------------------
+
     public void Check(RowElement r)
     {
         if (!isSameRowSize(r))
@@ -85,6 +95,8 @@ public class MatrixElement : Element
             Console.WriteLine("The number of integers in each row is not matched.");
         }
     }
+
+    //----< serialize the matrix in a string >------------------------------
 
     public override string ToString()
     {
@@ -102,6 +114,8 @@ public class MatrixElement : Element
         return s.ToString();
     }
 
+    //----< serialize the matrix to a List<int> >------------------------------
+
     public List<int> Serialize()
     {
         List<int> allNumbers = new List<int>();
@@ -114,6 +128,8 @@ public class MatrixElement : Element
         }
         return allNumbers;
     }
+
+    //----< transpose of a matrix >------------------------------
 
     public void Reverse(out MatrixElement element)
     {
@@ -132,6 +148,8 @@ public class MatrixElement : Element
             element.addRows(r);
         }
     }
+
+    //----< Matrix Addition O(n*m) >------------------------------
 
     public bool Addition(MatrixElement a, MatrixElement b, ref MatrixElement result)
     {
@@ -157,10 +175,10 @@ public class MatrixElement : Element
         return true;
     }
 
+    //----< Matrix Multiplication O(n*n*n) >------------------------------
+
     public bool Multiplication(MatrixElement a, MatrixElement b, ref MatrixElement result)
     {
-        //Console.WriteLine("matrix multiplication");
-
         int rowNumOfA = a.GetNumOfRows();
         int colNumOfA = a.GetNumOfCols();
 
