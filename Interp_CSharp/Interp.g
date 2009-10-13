@@ -16,12 +16,12 @@ options {
 } 
 
 @members {
-  protected void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
+  protected new void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
   {
     throw new MismatchedTokenException(ttype, input);
   }
   
-  public void RecoverFromMismatchedSet(IIntStream input,
+  public new void RecoverFromMismatchedSet(IIntStream input,
     RecognitionException e, BitSet follow)
   {
     throw e;

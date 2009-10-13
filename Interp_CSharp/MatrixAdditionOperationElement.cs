@@ -1,18 +1,11 @@
 ////////////////////////////////////////////////////////////////////////
-// AdditionOperationElement.java: holds the data needed for an addition 
+// MatrixAdditionOperationElement.cs: holds the data needed for an matrix addition 
 //  operation.
 // 
-// version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// version: 1.0
+// description: derived from phil's addition operation class
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
-// 
-// version: 1.0
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: phil pratt-szeliga (pcpratts@syr.edu)
-// language: Java 1.6.0.0
 ////////////////////////////////////////////////////////////////////////
 
 public class MatrixAdditionOperationElement : Element {

@@ -1,12 +1,12 @@
 ﻿////////////////////////////////////////////////////////////////////////
-// AdditionOperationElement.java: holds the data needed for an addition 
-//  operation.
+// ParallelAdditionOperationElement.cs: holds the data needed for a 
+//  parallel addition operation.
 // 
-// version: 1.0
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: phil pratt-szeliga (pcpratts@syr.edu)
-// language: Java 1.6.0.0
+// version: 1.1
+// description: parallel addition operation, it derives from ParallelElement
+//   base class
+// author: Zutao Zhu (zuzhu@syr.edu)
+// language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 
 public class ParallelAdditionOperationElement : ParallelElement
@@ -14,14 +14,15 @@ public class ParallelAdditionOperationElement : ParallelElement
 
     Element mLhs;
     Element mRhs;
-    //VariableElement mVar;
-    //int value;
-    //bool isVarSet = false;
 
+    //----< override Accept() of Element >------------------------------
+    
     public override void Accept(Visitor visitor)
     {
         visitor.VisitParallelAdditionOperationElement(this);
     }
+
+    //----< getters and setters >------------------------------
 
     public Element getLhs() { return mLhs; }
     public void setLhs(Element lhs) { mLhs = lhs; }
@@ -29,10 +30,4 @@ public class ParallelAdditionOperationElement : ParallelElement
     public Element getRhs() { return mRhs; }
     public void setRhs(Element rhs) { mRhs = rhs; }
 
-    //public int getValue() { return value; }
-    //public void setValue(int value) { this.value = value; }
-
-    //public VariableElement getVariable() { return mVar; }
-    //public void setVariable(VariableElement var) { mVar = var; isVarSet = true; }
-    //public bool getVarSetFlag() { return isVarSet; }
 }

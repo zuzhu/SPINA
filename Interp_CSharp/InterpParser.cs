@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-13 00:30:44
+// $ANTLR 3.1.3 Mar 18, 2009 10:09:25 Interp.g 2009-10-13 10:01:10
 
 
 using System.Collections.Generic;
@@ -101,12 +101,12 @@ public class InterpParser : Parser
     }
 
 
-      protected void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
+      protected new void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
       {
         throw new MismatchedTokenException(ttype, input);
       }
       
-      public void RecoverFromMismatchedSet(IIntStream input,
+      public new void RecoverFromMismatchedSet(IIntStream input,
         RecognitionException e, BitSet follow)
       {
         throw e;

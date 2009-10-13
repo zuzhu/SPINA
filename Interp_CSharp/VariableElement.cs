@@ -3,8 +3,7 @@
 //  in the Interp language.
 // 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// description: derived from phil's VariableElement class
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 // 

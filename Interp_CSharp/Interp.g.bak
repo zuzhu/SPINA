@@ -17,14 +17,12 @@ options {
 
 @members {
   protected void RecoverFromMismatchedToken(IIntStream input, int ttype, BitSet follow)
-    throws RecognitionException
   {
     throw new MismatchedTokenException(ttype, input);
   }
   
   public void RecoverFromMismatchedSet(IIntStream input,
     RecognitionException e, BitSet follow)
-    throws RecognitionException
   {
     throw e;
   }

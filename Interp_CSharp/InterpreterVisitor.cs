@@ -32,7 +32,7 @@ public class InterpreterVisitor : Visitor {
   Stack<IntegerElement> mIntStack;
   Dictionary<String, Element> mDict;
   Queue<int> mQueue;
-  SampleDelegate d1;
+  WriteBufferDelegate dele;
 
   //----< constructor >------------------------------
 
@@ -47,7 +47,7 @@ public class InterpreterVisitor : Visitor {
 
   //----< set a delegate >------------------------------
 
-  public void setDelegate(SampleDelegate value) { d1 = value; }
+  public void setDelegate(WriteBufferDelegate value) { dele = value; }
 
   //----< visit Variable >------------------------------
 
@@ -173,11 +173,11 @@ public class InterpreterVisitor : Visitor {
       else
       {
           Console.Write(r.getElement(0));
-          d1(r.getElement(0).ToString());
+          dele(r.getElement(0).ToString());
           for (int i = 1; i < r.Count(); ++i)
           {
               Console.Write(", " + r.getElement(i));
-              d1(", " + r.getElement(i).ToString());
+              dele(", " + r.getElement(i).ToString());
           }
       }
   }
@@ -201,26 +201,25 @@ public class InterpreterVisitor : Visitor {
             if (numOfRows == 1)
             {
                 Console.Write("[");
-                d1("[");
+                dele("[");
                 PrintRow(rows, 0);
                 Console.WriteLine("]");
-                d1("]\n");
+                dele("]\n");
             }
             else
             {
                 Console.Write("[");
-                d1("[");
+                dele("[");
                 PrintRow(rows, 0);
                 for (int i = 1; i < numOfRows; ++i)
                 {
                     Console.Write(";");
-                    d1(";");
-                    d1("\n");
+                    dele(";\n");
                     Console.WriteLine();
                     PrintRow(rows, i);
                 }
                 Console.WriteLine("]");
-                d1("]\n");
+                dele("]\n");
             }
         }
     }
@@ -228,7 +227,7 @@ public class InterpreterVisitor : Visitor {
     {
         IntegerElement result = mIntStack.Pop();
         Console.WriteLine(int.Parse(result.getText()));
-        d1(int.Parse(result.getText()).ToString());
+        dele(int.Parse(result.getText()).ToString());
     }
   }
 
@@ -241,10 +240,10 @@ public class InterpreterVisitor : Visitor {
       for (int i = 0; i < element.Count(); ++i)
       {
           Console.Write(row[i] + " ");
-          d1(row[i].ToString() + " ");
+          dele(row[i].ToString() + " ");
       }
       Console.WriteLine();
-      d1("\n");
+      dele("\n");
   }
 
   //----< visit a Matrix Element >------------------------------
@@ -266,8 +265,8 @@ public class InterpreterVisitor : Visitor {
   public override void VisitParallelForOperationElement(ParallelForOperationElement element)
   {
       Console.WriteLine("VisitParallelFor");
-      //d1("VisitParallelFor");
-      element.Beta();
+      //dele("VisitParallelFor");
+      element.ParallelRun();
   }
 
   //----< set the value of an index >------------------------------
@@ -340,7 +339,7 @@ public class InterpreterVisitor : Visitor {
   public override void VisitParallelAdditionOperationElement(ParallelAdditionOperationElement element)
   {
       Console.WriteLine("VisitParallelAddition");
-      //d1("VisitParallelAddition");
+      //dele("VisitParallelAddition");
       ParallelElement pe_lhs;
       if (element.getLhs() is ParallelElement)
       {
@@ -367,8 +366,11 @@ public class InterpreterVisitor : Visitor {
       mIntStack.Push(result);    
   }
 
+  //----< visit Parallel Assignment Operation >------------------------------
+
   public override void VisitParallelAssignmentOperationElement(ParallelAssignmentOperationElement element)
   {
+      // the rhs of ParallelForAssignment
       Element rhs = element.getRhs();
       ParallelElement pe_rhs = (ParallelElement)element.getRhs();
       if (element.getRhs() is ParallelElement)
@@ -390,55 +392,10 @@ public class InterpreterVisitor : Visitor {
       }
       VariableElement vie_var = (vie.getVariableElement()) as VariableElement;
       string s = vie_var.getText();
-      //int result_first_index_num = 0;
-      //int result_second_index_num = 0;
       Element result_first_index = vie.getFirstIndexElement();
       Element result_second_index = vie.getSecondIndexElement();
       int result_first_index_num = setVectorIndexValue(vie, result_first_index);
-      //if (result_first_index is VariableElement)
-      //{
-      //    VariableElement var = (VariableElement)result_first_index;
-      //    VariableElement iteration_var = (VariableElement)(vie.getVariable());
-      //    if (var.getText() != iteration_var.getText())
-      //    {
-      //        //d1("incorrect index");
-      //    }
-      //    else
-      //    {
-      //        result_first_index_num = vie.getValue();
-      //    }
-      //}
-      //else
-      //{
-      //    if (result_first_index is IntegerElement)
-      //    {
-      //        IntegerElement int_elem = (IntegerElement)result_first_index;
-      //        result_first_index_num = int.Parse(int_elem.getText());
-      //    }
-      //}
-
       int result_second_index_num = setVectorIndexValue(vie, result_second_index);
-      //if (result_second_index is VariableElement)
-      //{
-      //    VariableElement var = (VariableElement)result_second_index;
-      //    VariableElement childElement = (VariableElement)(vie.getVariable());
-      //    if (var.getText() != childElement.getText())
-      //    {
-      //        //d1("incorrect index");
-      //    }
-      //    else
-      //    {
-      //        result_second_index_num = vie.getValue();
-      //    }
-      //}
-      //else
-      //{
-      //    if (result_second_index is IntegerElement)
-      //    {
-      //        IntegerElement int_elem = (IntegerElement)result_second_index;
-      //        result_second_index_num = int.Parse(int_elem.getText());
-      //    }
-      //}
 
       if (mVariableMap.ContainsKey(s))
       {

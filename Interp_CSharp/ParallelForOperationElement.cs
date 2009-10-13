@@ -1,17 +1,11 @@
 ﻿////////////////////////////////////////////////////////////////////////
-// PrintOperationElement.cs: hold the data needed to implement the
-//  'print' function in the Interp language.
-// 
-// version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: Zutao Zhu (zuzhu@syr.edu)
-// language: C# .Net 3.5
+// ParallelForOperationElement.cs: hold the data needed to implement the
+//  parallel-for computation in the SPINA language.
 // 
 // version: 1.0
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: phil pratt-szeliga (pcpratts@syr.edu)
+// description: the class sets the data structure for parallel-for computation
+//   and distribute itself to multi-thread to run the work
+// author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
@@ -23,14 +17,18 @@ public class ParallelForOperationElement : Element
 
     Element mChildElement;
     List<Element> mExpressionElement;
-    int lowbound;
-    int uppbound;
+    int lowbound;   // the lower bound of the iterator
+    int uppbound;   // the upper bound of the iterator
     Visitor visitor;
+
+    //----< constructor >------------------------------
 
     public ParallelForOperationElement()
     {
         mExpressionElement = new List<Element>();
     }
+
+    //----< getters and setters >------------------------------
 
     public Element getChildElement() { return mChildElement; }
     public void setChildElement(Element value) { mChildElement = value; }
@@ -45,15 +43,18 @@ public class ParallelForOperationElement : Element
     public int getHighRange() { return uppbound; }
     public void setHighRange(IntegerElement e) { uppbound = int.Parse(e.getText()); }
 
+    //----< override Accept() of Element >------------------------------
+
     public override void Accept(Visitor visitor)
     {
         this.visitor = visitor;
         visitor.VisitParallelForOperationElement(this);
     }
 
-    public void Beta()
+    //----< parallel run function >------------------------------
+
+    public void ParallelRun()
     {
-        // For debugging purpose, change uppbound to lowbound
         for (int i = lowbound; i <= uppbound; ++i)
         {
             myThread m = new myThread();
@@ -61,7 +62,7 @@ public class ParallelForOperationElement : Element
             m.setChildElement(this.mChildElement);
             m.setExpressionElement(this.mExpressionElement);
             m.setVisitor(visitor);
-            Thread oThread = new Thread(new ThreadStart(m.Beta));
+            Thread oThread = new Thread(new ThreadStart(m.Run));
             oThread.Start();
         }
     }

@@ -1,17 +1,11 @@
 ﻿////////////////////////////////////////////////////////////////////////
-// PrintOperationElement.cs: hold the data needed to implement the
-//  'print' function in the Interp language.
-// 
-// version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: Zutao Zhu (zuzhu@syr.edu)
-// language: C# .Net 3.5
+// VectorIndexElement.cs: hold the data needed to implement the
+//  things like "a[1][2]" in the Interp language.
 // 
 // version: 1.0
-// description: part of the interpreter example for the visitor design
-//  pattern.
-// author: phil pratt-szeliga (pcpratts@syr.edu)
+// description: it is used in the parallel-for. therefore, it is derived
+//   from the ParallelElement
+// author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 ////////////////////////////////////////////////////////////////////////
 
@@ -21,10 +15,9 @@ public class VectorIndexElement : ParallelElement
     Element mChildElement;
     Element mFirstIndexElement;
     Element mSecondIndexElement;
-    //VariableElement mVar;
-    //int value;
     bool hasSecond = false;
-    //bool isVarSet = false;
+
+    //----< getters and setters >------------------------------
 
     public Element getVariableElement() { return mChildElement; }
     public void setVariableElement(Element value) { mChildElement = value; }
@@ -38,12 +31,7 @@ public class VectorIndexElement : ParallelElement
     public bool HasSecond() { return hasSecond; }
     public void setHasSecond(bool value) { hasSecond = value; }
 
-    //public int getValue() { return value; }
-    //public void setValue(int value) { this.value = value; }
-
-    //public VariableElement getVariable() { return mVar; }
-    //public void setVariable(VariableElement var) { mVar = var; isVarSet = true; }
-    //public bool getVarSetFlag() { return isVarSet; }
+    //----< Accept >------------------------------
 
     public override void Accept(Visitor visitor)
     {

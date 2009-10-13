@@ -3,8 +3,7 @@
 //  'print' function in the Interp language.
 // 
 // version: 1.1
-// description: part of the interpreter example for the visitor design
-//  pattern.
+// description: same as phil's PrintOperationElement.cs
 // author: Zutao Zhu (zuzhu@syr.edu)
 // language: C# .Net 3.5
 // 
